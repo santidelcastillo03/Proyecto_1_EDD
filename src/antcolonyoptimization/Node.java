@@ -31,12 +31,10 @@ public class Node<T> {
     public void removeAdjNode(Node<T> node) {
         for (int i = 0; i < index; i++) {
             if (adjNodes[i].equals(node)) {
-                // Shift all elements to the left
                 for (int j = i; j < index - 1; j++) {
                     adjNodes[j] = adjNodes[j + 1];
                     pheromones[j] = pheromones[j + 1];
                 }
-                // Decrease the index
                 index--;
                 break;
             }

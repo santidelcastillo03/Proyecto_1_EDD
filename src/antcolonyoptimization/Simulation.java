@@ -22,7 +22,6 @@ public class Simulation {
     }
 
     public void deleteCity(String name) {
-        // Find the city to delete
         Node<City> cityToDelete = null;
         int indexToDelete = -1;
         for (int i = 0; i < cityList.getSize(); i++) {
