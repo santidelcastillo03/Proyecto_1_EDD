@@ -25,8 +25,8 @@ public class Graph<T> {
         Node<T> node2 = findNode(data2);
 
         if (node1 != null && node2 != null) {
-            node1.addAdjNode(node2);
-            node2.addAdjNode(node1);
+            node1.addAdjNode(node2, nodes.length);
+            node2.addAdjNode(node1, nodes.length);
         }
     }
 
