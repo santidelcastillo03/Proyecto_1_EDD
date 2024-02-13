@@ -10,7 +10,7 @@ package antcolonyoptimization;
  */
 public class Node<T> {
     T data;
-    double[] pheromones;
+    double[] pheromones; //cantidad de feromonas en la arista entre el node y cada node adyacente
     Node<T>[] adjNodes;
     int index = 0;
 
