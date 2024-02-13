@@ -26,8 +26,13 @@ public class Ant {
         for (int i = 0; i < cycles; i++) {
             while (!currentCity.equals(destinationCity)) {
                // currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
-            }       
+            }
+           updatePheromones();
         }
+    }
+
+    public void updatePheromones() {
+
     }
     
 }
