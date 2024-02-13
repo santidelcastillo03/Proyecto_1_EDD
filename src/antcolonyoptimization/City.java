@@ -42,6 +42,7 @@ public class City {
     public void setyCoordinate(double yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
-    
+
+
     
 }
