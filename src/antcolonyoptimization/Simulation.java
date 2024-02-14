@@ -26,7 +26,19 @@ public class Simulation {
         this.cityList = new CityList();
         this.graph = new Graph<>(cityList.getSize());
     }
+    
+       public void setAlpha(double alpha) {
+        Ant.setAlpha(alpha);
+    }//cambia el valor de alpha en la clase Ant
 
+    public void setBeta(double beta) {
+        Ant.setBeta(beta);
+    }//igual que arriba pero beta
+
+    public void setCycles(int cycles) {
+        this.cycles = cycles;
+        Ant.setCycles(cycles);
+    }
     public void deleteCity(String name) {
         if (graph.nodes.length <= 4) {
             return;
