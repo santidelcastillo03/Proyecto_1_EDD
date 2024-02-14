@@ -4,6 +4,8 @@
  */
 package antcolonyoptimization;
 
+import antcolonyoptimization.UI.MainPage;
+
 /**
  *
  * @author santiagodelcastillo
@@ -14,7 +16,8 @@ public class AntColonyOptimization {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MainPage mainPage = new MainPage();
+        mainPage.setVisible(true);
     }
     
 }

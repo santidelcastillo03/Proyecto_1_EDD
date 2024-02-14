@@ -11,6 +11,8 @@ package antcolonyoptimization;
 public class Simulation {
     private double alpha;
     private double beta;
+
+    private int numAnts;
     private int cycles;
     private CityList cityList;
     private Graph<City> graph;
@@ -18,6 +20,7 @@ public class Simulation {
     public Simulation(double alpha, double beta, int cycles) {
         this.alpha = alpha;
         this.beta = beta;
+        this.numAnts = numAnts;
         this.cycles = cycles;
         this.cityList = new CityList();
         this.graph = new Graph<>(cityList.getSize());

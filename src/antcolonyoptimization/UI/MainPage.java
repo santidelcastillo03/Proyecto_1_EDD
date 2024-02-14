@@ -9,12 +9,14 @@ package antcolonyoptimization.UI;
  * @author santiagodelcastillo
  */
 public class MainPage extends javax.swing.JFrame {
-
+    NewSim newSim = new NewSim();
     /**
      * Creates new form MainPage
      */
     public MainPage() {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,18 +41,29 @@ public class MainPage extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jButton1.setText("Load");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 220, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 220, 60));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel1.setText("Nombre");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jButton3.setText("New");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 220, 60));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 220, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        newSim.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
