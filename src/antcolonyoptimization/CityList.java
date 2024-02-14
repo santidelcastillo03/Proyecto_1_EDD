@@ -60,6 +60,17 @@ public class CityList {
     public int getSize() {
         return size;
     }
+
+    public Node<City> getCityByName(String cityName) {
+        Node<City> current = head;
+        while (current != null) {
+            if (current.data.getName().equals(cityName)) {
+                return current;
+            }
+            current = current.adjNodes[current.index];
+        }
+        return null;
+    }
 }
 
 
