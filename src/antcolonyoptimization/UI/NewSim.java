@@ -9,7 +9,7 @@ package antcolonyoptimization.UI;
  * @author santiagodelcastillo
  */
 public class NewSim extends javax.swing.JFrame {
-
+    AddCity addCity = new AddCity();
     /**
      * Creates new form AddCity
      */
@@ -96,6 +96,11 @@ public class NewSim extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
 
         jButton4.setText("New city");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, -1, -1));
 
         jLabel9.setText("Este boton abrira una ventanita para agergar ciudades");
@@ -111,6 +116,11 @@ public class NewSim extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        addCity.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

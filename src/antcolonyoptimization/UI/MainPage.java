@@ -10,6 +10,7 @@ package antcolonyoptimization.UI;
  */
 public class MainPage extends javax.swing.JFrame {
     NewSim newSim = new NewSim();
+    LoadSim loadSim = new LoadSim();
     /**
      * Creates new form MainPage
      */
@@ -41,6 +42,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jButton1.setText("Load");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 220, 60));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
@@ -64,6 +70,12 @@ public class MainPage extends javax.swing.JFrame {
         this.setVisible(false);
         newSim.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        loadSim.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
