@@ -17,15 +17,16 @@ public class CityList {
         size = 0;
     }
 
-    public void addCity(Node<City> city) {
+    public void addCity(City city) {
+        Node<City> newNode = new Node<>(city, size);
         if (head == null) {
-            head = city;
+            head = newNode;
         } else {
             Node<City> current = head;
-            while (current.adjNodes[current.index] != null) {
+            while (current.adjNodes[current.index] != null && current.index < size - 1) {
                 current = current.adjNodes[current.index];
             }
-            current.adjNodes[current.index] = city;
+            current.addAdjNode(newNode, size);
         }
         size++;
     }
