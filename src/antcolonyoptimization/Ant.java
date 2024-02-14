@@ -15,16 +15,16 @@ public class Ant {
     private static final double Q = 1.0;
     private static final Random RANDOM = new Random();
      private Node<City> currentCity;
-    private Node<City> destinationCity;
+    private Node<City> finalCity;
 
-    public Ant(Node<City> startCity, Node<City> destinationCity) {
+    public Ant(Node<City> startCity, Node<City> finalCity) {
         this.currentCity = startCity;
-        this.destinationCity = destinationCity;
+        this.finalCity = finalCity;
     }
     //revisa si se realizo un ciclo
     public void performCycles(int cycles) {
         for (int i = 0; i < cycles; i++) {
-            while (!currentCity.equals(destinationCity)) {
+            while (!currentCity.equals(finalCity)) {
                // currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
             }
            updatePheromones();
