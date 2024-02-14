@@ -11,6 +11,8 @@ package antcolonyoptimization;
 public class Graph<T> {
     Node<T>[] nodes;
     int index = 0;
+    Node<T> startCity;
+    Node<T> finalCity;
 
     public Graph(int size) {
         nodes = new Node[size];
@@ -37,5 +39,27 @@ public class Graph<T> {
             }
         }
         return null;
+    }
+
+    public void setStartCity(T data) {
+        Node<T> node = findNode(data);
+        if (node!= null) {
+            this.startCity = node;
+        }
+    }
+
+    public Node<T> getStartCity() {
+        return this.startCity;
+    }
+
+    public void setFinalCity(T data) {
+        Node<T> node = findNode(data);
+        if (node!= null) {
+            this.finalCity = node;
+        }
+    }
+
+    public Node<T> getFinalCity() {
+        return this.finalCity;
     }
 }

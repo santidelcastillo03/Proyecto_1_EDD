@@ -13,15 +13,20 @@ public class Simulation {
     private double beta;
     private int cycles;
     private CityList cityList;
+    private Graph<City> graph;
     
     public Simulation(double alpha, double beta, int cycles) {
         this.alpha = alpha;
         this.beta = beta;
         this.cycles = cycles;
         this.cityList = new CityList();
+        this.graph = new Graph<>(cityList.getSize());
     }
 
     public void deleteCity(String name) {
+        if (graph.nodes.length <= 4) {
+            return;
+        }
         Node<City> cityToDelete = null;
         int indexToDelete = -1;
         for (int i = 0; i < cityList.getSize(); i++) {
@@ -34,7 +39,10 @@ public class Simulation {
         }
 
         if (cityToDelete == null) {
-            System.out.println("City not found.");
+            return;
+        }
+
+        if (cityToDelete.equals(graph.startCity) || cityToDelete.equals(graph.finalCity)) {
             return;
         }
 
@@ -48,7 +56,6 @@ public class Simulation {
     
       public void addCity(String name, double xCoordinate, double yCoordinate) {
         if (cityList.getSize() >= 20) {
-            System.out.println("Cannot add more cities. The limit is 20.");
             return;
         }
 
