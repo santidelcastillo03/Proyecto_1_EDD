@@ -33,6 +33,18 @@ public class DynamicArray<T> {
         size--;
     }
 
+    public void removeN(Node<T> node) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(node)) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            remove(index);
+        }
+    }
 
     public T get(int index) {
         if (index >= size || index < 0) {

@@ -45,7 +45,22 @@ public class Graph<T> {
         }
     }
 
+    public void removeNode(T data) {
+        Node<T> nodeToRemove = findNode(data);
+        if (nodeToRemove != null) {
+            for (int i = 0; i < nodes.size(); i++) {
+                nodes.get(i).removeAdjNode(nodeToRemove);
+            }
+            nodes.removeN((Node<Node<T>>) nodeToRemove);
 
+            if (nodeToRemove.equals(startCity)) {
+                startCity = null;
+            }
+            if (nodeToRemove.equals(finalCity)) {
+                finalCity = null;
+            }
+        }
+    }
 
     private Node<T> findNode(T data) {
         for (int i = 0; i < nodes.size(); i++) {
