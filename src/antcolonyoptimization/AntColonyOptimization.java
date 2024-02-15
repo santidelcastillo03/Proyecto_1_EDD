@@ -19,7 +19,7 @@ public class AntColonyOptimization {
         MainPage mainPage = new MainPage();
         mainPage.setVisible(true);
 
-        Graph<City> graph = new Graph<>();
+        Grafo<City> graph = new Grafo<>();
 
         // Step 2: Create some City objects and add them to the graph
         City newYork = new City("New York", 40.7128, 74.0060);

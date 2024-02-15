@@ -11,12 +11,12 @@ import javax.swing.*;
  * @author santiagodelcastillo
  */
 
-public class Graph<T> {
+public class Grafo<T> {
     DynamicArray<Node<T>> nodes;
     Node<T> startCity;
     Node<T> finalCity;
 
-    public Graph() {
+    public Grafo() {
         nodes = new DynamicArray<>();
     }
 

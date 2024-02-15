@@ -14,7 +14,7 @@ public class Simulation {
     private int rho;
     private int numAnts;
     private int cycles;
-    private Graph<City> graph;
+    private Grafo<City> graph;
     
     public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
         this.alpha = alpha;
