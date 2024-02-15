@@ -10,34 +10,31 @@ package antcolonyoptimization;
  */
 public class Node<T> {
     T data;
-    double[] pheromones; //cantidad de feromonas en la arista entre el node y cada node adyacente
-    Node<T>[] adjNodes;
-    int index = 0;
+    DynamicArray<Double> pheromones;
+    DynamicArray<Node<T>> adjNodes;
 
-    public Node(T data, int size) {
+    public Node(T data) {
         this.data = data;
-        this.adjNodes = new Node[size];
-        this.pheromones = new double[size];
+        this.adjNodes = new DynamicArray<>();
+        this.pheromones = new DynamicArray<>();
     }
 
-    public void addAdjNode(Node<T> node, int size) {
-        adjNodes[index] = node;
-        pheromones[index] = 1.0 / size;
-        index++;
+    public void addAdjNode(Node<T> node) {
+        adjNodes.add(node);
+        pheromones.add(1.0 / adjNodes.size());
     }
-
-
 
     public void removeAdjNode(Node<T> node) {
-        for (int i = 0; i < index; i++) {
-            if (adjNodes[i].equals(node)) {
-                for (int j = i; j < index - 1; j++) {
-                    adjNodes[j] = adjNodes[j + 1];
-                    pheromones[j] = pheromones[j + 1];
-                }
-                index--;
+        int index = -1;
+        for (int i = 0; i < adjNodes.size(); i++) {
+            if (adjNodes.get(i).equals(node)) {
+                index = i;
                 break;
             }
+        }
+        if (index != -1) {
+            adjNodes.remove(index);
+            pheromones.remove(index);
         }
     }
 }

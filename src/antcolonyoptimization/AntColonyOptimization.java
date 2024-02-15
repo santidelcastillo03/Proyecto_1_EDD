@@ -19,7 +19,7 @@ public class AntColonyOptimization {
         MainPage mainPage = new MainPage();
         mainPage.setVisible(true);
 
-        Graph<City> graph = new Graph<>(3);
+        Graph<City> graph = new Graph<>();
 
         // Step 2: Create some City objects and add them to the graph
         City newYork = new City("New York", 40.7128, 74.0060);
@@ -36,13 +36,20 @@ public class AntColonyOptimization {
         graph.addEdge(losAngeles, chicago);
 
         // Step 4: Print out the adjacency list of the graph
-        for (Node<City> node : graph.nodes) {
+        for (int i = 0; i < graph.nodes.size(); i++) {
+            Node<City> node = graph.nodes.get(i);
             System.out.println(node.data + " is connected to:");
-            for (int i = 0; i < node.index; i++) {
-                System.out.println(node.adjNodes[i].data);
+            for (int j = 0; j < node.adjNodes.size(); j++) {
+                System.out.println(node.adjNodes.get(j).data);
             }
             System.out.println();
         }
+        
+        graph.setStartCity(newYork);
+        graph.setFinalCity(chicago);
+        System.out.println("The size of the graph is: " + graph.nodes.size());
+        System.out.println(graph.startCity.data);
+        System.out.println(graph.finalCity.data);
     }
 }
 
