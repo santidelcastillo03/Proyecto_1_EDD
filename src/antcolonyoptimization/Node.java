@@ -37,4 +37,11 @@ public class Node<T> {
             pheromones.remove(index);
         }
     }
+
+    public DynamicArray<Node<T>> getAdjNodes() {
+        return this.adjNodes;
+    }
+
+    
+    
 }

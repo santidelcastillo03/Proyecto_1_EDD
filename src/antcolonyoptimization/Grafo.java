@@ -11,12 +11,12 @@ import javax.swing.*;
  * @author santiagodelcastillo
  */
 
-public class Graph<T> {
+public class Grafo<T> {
     DynamicArray<Node<T>> nodes;
     Node<T> startCity;
     Node<T> finalCity;
 
-    public Graph() {
+    public Grafo() {
         nodes = new DynamicArray<>();
     }
 
@@ -32,7 +32,7 @@ public class Graph<T> {
         Node<T> node2 = findNode(data2);
         if (node1 != null && node2 != null) {
             node1.addAdjNode(node2);
-            node2.addAdjNode(node1);
+
         }
     }
 
@@ -41,7 +41,7 @@ public class Graph<T> {
         Node<T> node2 = findNode(data2);
         if (node1 != null && node2 != null) {
             node1.removeAdjNode(node2);
-            node2.removeAdjNode(node1);
+            
         }
     }
 
@@ -97,5 +97,9 @@ public class Graph<T> {
 
     public Node<T> getFinalCity() {
         return this.finalCity;
+    }
+
+    public DynamicArray<Node<T>> getNodes() {
+        return this.nodes;
     }
 }
