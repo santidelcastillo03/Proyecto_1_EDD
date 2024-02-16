@@ -32,7 +32,7 @@ public class Grafo<T> {
         Node<T> node2 = findNode(data2);
         if (node1 != null && node2 != null) {
             node1.addAdjNode(node2);
-            node2.addAdjNode(node1);
+
         }
     }
 
@@ -97,5 +97,9 @@ public class Grafo<T> {
 
     public Node<T> getFinalCity() {
         return this.finalCity;
+    }
+
+    public DynamicArray<Node<T>> getNodes() {
+        return this.nodes;
     }
 }
