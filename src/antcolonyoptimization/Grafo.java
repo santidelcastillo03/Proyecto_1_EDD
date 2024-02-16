@@ -41,7 +41,7 @@ public class Grafo<T> {
         Node<T> node2 = findNode(data2);
         if (node1 != null && node2 != null) {
             node1.removeAdjNode(node2);
-            node2.removeAdjNode(node1);
+            
         }
     }
 
