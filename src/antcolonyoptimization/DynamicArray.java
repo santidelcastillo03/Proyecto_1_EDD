@@ -4,11 +4,13 @@
  */
 package antcolonyoptimization;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 /**
  *
  * @author Santiago
  */
-public class DynamicArray<T> {
+public class DynamicArray<T> implements Iterable<T> {
     private Object[] array;
     private int size = 0;
 
@@ -62,6 +64,28 @@ public class DynamicArray<T> {
         System.arraycopy(array, 0, newArray, 0, array.length);
         array = newArray;
     }
+
+
+
+        @Override
+        public Iterator<T> iterator() {
+            return new Iterator<T>() {
+                private int currentIndex = 0;
+
+                @Override
+                public boolean hasNext() {
+                    return currentIndex < size && array[currentIndex] != null;
+                }
+
+                @Override
+                public T next() {
+                    if (!hasNext()) {
+                        throw new NoSuchElementException();
+                    }
+                    return (T) array[currentIndex++];
+                }
+            };
+        }
 
 
 }
