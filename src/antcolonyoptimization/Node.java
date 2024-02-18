@@ -52,6 +52,12 @@ public class Node<T> {
 
     public DynamicArray<Double> getAllPheromones() {
         return pheromones;
+    }
+
+    public void setAllPheromones(DynamicArray<Double> pheromones) {
+        this.pheromones = pheromones;
+    }
+
     
     
 }
