@@ -12,14 +12,12 @@ public class Simulation {
     private double alpha;
     private double beta;
     private int rho;
-    private int numAnts;
     private int cycles;
     private Grafo<City> graph;
     
-    public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
+    public Simulation(double alpha, double beta, int cycles, int rho) {
         this.alpha = alpha;
         this.beta = beta;
-        this.numAnts = numAnts;
         this.rho = rho;
         this.cycles = cycles;
     }
@@ -28,7 +26,12 @@ public class Simulation {
           
       }
     
-    public void antGroup(int totalAnts) {
+    public void antGroup(int totalAnts, int cycles) {
+        Ant.setTotalAnts(totalAnts);
         
+        for (int i = 0; i < Ant.getTotalAnts(); i++) {
+            Ant ant = new Ant(graph.getStartCity(), graph.getFinalCity());
+            ant.performCycles(cycles);
+        }
     }
 }
