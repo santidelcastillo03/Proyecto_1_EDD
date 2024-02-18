@@ -35,10 +35,10 @@ public class DynamicArray<T> implements Iterable<T> {
         size--;
     }
 
-    public void removeN(Node<T> node) {
+    public void removeN(T element) {
         int index = -1;
         for (int i = 0; i < size; i++) {
-            if (array[i].equals(node)) {
+            if (array[i].equals(element)) {
                 index = i;
                 break;
             }

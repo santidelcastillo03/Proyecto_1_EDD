@@ -9,63 +9,75 @@ import javax.swing.*;
 /**
  *
  * @author santiagodelcastillo
+ * @param <T>
  */
 
 public class Grafo<T> {
-    DynamicArray<Node<T>> nodes;
-    Node<T> startCity;
-    Node<T> finalCity;
+    private DynamicArray<City> cities;
+    private DynamicArray<Edge> edges;
+    private City startCity;
+    private City finalCity;
 
     public Grafo() {
-        nodes = new DynamicArray<>();
+        cities = new DynamicArray<>();
+        edges = new DynamicArray<>();
+    }
+    
+    
+
+    public void addCity(T data) {
+        if (cities.size() >= 20) {
+            JOptionPane.showMessageDialog(null,"you can't add more cities");
+        }
+        cities.add(new City((String) data));
     }
 
-    public void addNode(T data) {
-        if (nodes.size() >= 20) {
-            JOptionPane.showMessageDialog(null,"you cant add more cities");
+    public Edge addEdge(T data1, T data2, double weight) {
+        City city1 = findCity(data1);
+        City city2 = findCity(data2);
+        if (city1 != null && city2 != null) {
+            Edge newEdge = new Edge(city1, city2, weight);
+            this.edges.add(newEdge);
+            return newEdge;
+
         }
-        nodes.add(new Node<>(data));
+        else{
+            return null;
+        }
     }
 
-    public void addEdge(T data1, T data2) {
-        Node<T> node1 = findNode(data1);
-        Node<T> node2 = findNode(data2);
-        if (node1 != null && node2 != null) {
-            node1.addAdjNode(node2);
+    public void setCities(DynamicArray<City> cities) {
+        this.cities = cities;
+    }
 
-        }
+    public void setEdges(DynamicArray<Edge> edges) {
+        this.edges = edges;
+    }
+
+
+    public DynamicArray<Edge> getEdges() {
+        return edges;
     }
 
     public void removeEdge(T data1, T data2) {
-        Node<T> node1 = findNode(data1);
-        Node<T> node2 = findNode(data2);
-        if (node1 != null && node2 != null) {
-            node1.removeAdjNode(node2);
+        City city1 = findCity(data1);
+        City city2 = findCity(data2);
+        if (city1 != null && city2 != null) {
+            for(int i=0; i < this.edges.size(); i++){
+                if(edges.get(i).getPrevious() == city1 && edges.get(i).getNext() == city2){
+                    edges.get(i).setPrevious(null);
+                    edges.get(i).setNext(null);
+                    edges.remove(i);     
+                }
+            }
             
         }
     }
 
-    public void removeNode(T data) {
-        Node<T> nodeToRemove = findNode(data);
-        if (nodeToRemove != null) {
-            for (int i = 0; i < nodes.size(); i++) {
-                nodes.get(i).removeAdjNode(nodeToRemove);
-            }
-            nodes.removeN((Node<Node<T>>) nodeToRemove);
-
-            if (nodeToRemove.equals(startCity)) {
-                startCity = null;
-            }
-            if (nodeToRemove.equals(finalCity)) {
-                finalCity = null;
-            }
-        }
-    }
-
-    private Node<T> findNode(T data) {
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).data.equals(data)) {
-                return nodes.get(i);
+    private City findCity(T data) {
+        for (int i = 0; i < cities.size(); i++) {
+            if (cities.get(i).equals(data)) {
+                return cities.get(i);
             }
         }
         return null;
@@ -75,13 +87,13 @@ public class Grafo<T> {
         if (this.startCity != null) {
             throw new IllegalStateException("Start city has already been set");
         }
-        Node<T> node = findNode(data);
-        if (node != null) {
-            this.startCity = node;
+        City city = findCity(data);
+        if (city != null) {
+            this.startCity = city;
         }
     }
 
-    public Node<T> getStartCity() {
+    public City getStartCity() {
         return this.startCity;
     }
 
@@ -89,17 +101,17 @@ public class Grafo<T> {
         if (this.finalCity != null) {
             throw new IllegalStateException("Final city has already been set");
         }
-        Node<T> node = findNode(data);
-        if (node != null) {
-            this.finalCity = node;
+        City city= findCity(data);
+        if (city != null) {
+            this.finalCity = city;
         }
     }
 
-    public Node<T> getFinalCity() {
+    public City getFinalCity() {
         return this.finalCity;
     }
 
-    public DynamicArray<Node<T>> getNodes() {
-        return this.nodes;
+    public DynamicArray<City> getCities() {
+        return this.cities;
     }
 }

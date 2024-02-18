@@ -10,16 +10,15 @@ import java.util.Random;
  * @author santiagodelcastillo
  */
 public class Ant {
-    private static double alpha = 1.0;
-    private static double beta = 2.0;
-    private static double Q = 1.0;
-
+    private static double alpha;
+    private static double beta;
+    private static double Q;
     private static int cycles;
     private static Random RANDOM = new Random();
-    private Node<City> currentCity;
-    private Node<City> finalCity;
+    private City currentCity;
+    private City finalCity;
 
-    public Ant(Node<City> startCity, Node<City> finalCity) {
+    public Ant(City startCity, City finalCity) {
         this.currentCity = startCity;
         this.finalCity = finalCity;
     }
@@ -53,15 +52,22 @@ public class Ant {
     public void performCycles(int cycles) {
         for (int i = 0; i < cycles; i++) {
             while (!currentCity.equals(finalCity)) {
-               currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
+               
+                
+                currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
             }
            updatePheromones();
         }
     }
 
     
-    public Node decideNextCity(Node currentCity){
+    public City decideNextCity(City currentCity){
         DynamicArray probArray = new DynamicArray();
+        DynamicArray adjNodes = new DynamicArray();
+
+        for(int i = 0; i < len; i++){
+            if 
+        }
         double total = 0;
         for(int i = 0; i < currentCity.getAdjNodes().size(); i++){
             Node b = (Node) currentCity.getAdjNodes().get(i);
@@ -103,6 +109,7 @@ public class Ant {
     }
     
 public void updatePheromones() {
+    
 
     }
     
