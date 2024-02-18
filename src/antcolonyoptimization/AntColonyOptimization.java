@@ -22,8 +22,8 @@ public class AntColonyOptimization {
         Grafo<City> grafo = new Grafo<>();
 
         City city1 = new City("City1", 0.0, 0.0);
-        City city2 = new City("City2", 0.0, 0.0);
-        City city3 = new City("City3", 0.0, 0.0);
+        City city2 = new City("City2", 1.0, 3.0);
+        City city3 = new City("City3", 2.0, 5.0);
 
     grafo.addNode(city1);
     grafo.addNode(city2);
