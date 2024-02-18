@@ -28,5 +28,7 @@ public class Simulation {
           
       }
     
-    
+    public void antGroup(int totalAnts) {
+        
+    }
 }

@@ -17,6 +17,16 @@ public class Ant {
     private static Random RANDOM = new Random();
     private City currentCity;
     private City finalCity;
+    private static int totalAnts;
+
+    public static int getTotalAnts() {
+        return totalAnts;
+    }
+
+    public static void setTotalAnts(int totalAnts) {
+        Ant.totalAnts = totalAnts;
+    }
+    
 
     public Ant(City startCity, City finalCity) {
         this.currentCity = startCity;
