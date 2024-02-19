@@ -9,97 +9,140 @@ import javax.swing.*;
 /**
  *
  * @author santiagodelcastillo
+ * @param <T>
  */
 
 public class Grafo<T> {
-    DynamicArray<Node<T>> nodes;
-    Node<T> startCity;
-    Node<T> finalCity;
+    private static DynamicArray<City> cities;
+    private static DynamicArray<Edge> edges;
+    private static City startCity;
+    private static City finalCity;
 
     public Grafo() {
-        nodes = new DynamicArray<>();
+        cities = new DynamicArray<>();
+        edges = new DynamicArray<>();
     }
+    
+    
 
-    public void addNode(T data) {
-        if (nodes.size() >= 20) {
-            JOptionPane.showMessageDialog(null,"you cant add more cities");
+    public void addCity(String data) {
+        if (cities.size() >= 20) {
+            JOptionPane.showMessageDialog(null,"you can't add more cities");
         }
-        nodes.add(new Node<>(data));
+        cities.add(new City(data));
     }
 
-    public void addEdge(T data1, T data2) {
-        Node<T> node1 = findNode(data1);
-        Node<T> node2 = findNode(data2);
-        if (node1 != null && node2 != null) {
-            node1.addAdjNode(node2);
+    public Edge addEdge(String data1, String data2, double weight) {
+        City city1 = findCity(data1);
+        City city2 = findCity(data2);
+        if (city1 != null && city2 != null) {
+            Edge newEdge = new Edge(city1, city2, weight);
+            this.edges.add(newEdge);
+            return newEdge;
 
+        }
+        else{
+            return null;
         }
     }
 
-    public void removeEdge(T data1, T data2) {
-        Node<T> node1 = findNode(data1);
-        Node<T> node2 = findNode(data2);
-        if (node1 != null && node2 != null) {
-            node1.removeAdjNode(node2);
+    public void removeCity(String cityName) {
+        City cityToRemove = findCity(cityName);
+        if (cityToRemove != null) {
+            int cityIndex = cities.indexOf(cityToRemove);
+            if (cityIndex != -1) {
+                cities.remove(cityIndex);
+            }
+
+            for (int i = edges.size() - 1; i >= 0; i--) {
+                Edge edge = edges.get(i);
+                if (edge.getPrevious().equals(cityToRemove) || edge.getNext().equals(cityToRemove)) {
+                    edges.remove(i);
+                }
+            }
+        }
+    }
+    
+
+    public void setCities(DynamicArray<City> cities) {
+        this.cities = cities;
+    }
+    
+    public void setEdges(DynamicArray<Edge> edges) {
+        this.edges = edges;
+    }
+
+
+    public static DynamicArray<Edge> getEdges() {
+        return edges;
+    }
+
+    public void removeEdge(String data1, String data2) {
+        City city1 = findCity(data1);
+        City city2 = findCity(data2);
+        if (city1 != null && city2 != null) {
+            for(int i=0; i < this.edges.size(); i++){
+                if(edges.get(i).getPrevious() == city1 && edges.get(i).getNext() == city2){
+                    edges.get(i).setPrevious(null);
+                    edges.get(i).setNext(null);
+                    edges.remove(i);     
+                }
+            }
             
         }
     }
 
-    public void removeNode(T data) {
-        Node<T> nodeToRemove = findNode(data);
-        if (nodeToRemove != null) {
-            for (int i = 0; i < nodes.size(); i++) {
-                nodes.get(i).removeAdjNode(nodeToRemove);
-            }
-            nodes.removeN((Node<Node<T>>) nodeToRemove);
-
-            if (nodeToRemove.equals(startCity)) {
-                startCity = null;
-            }
-            if (nodeToRemove.equals(finalCity)) {
-                finalCity = null;
-            }
-        }
-    }
-
-    private Node<T> findNode(T data) {
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).data.equals(data)) {
-                return nodes.get(i);
+    private City findCity(String data) {
+        for (int i = 0; i < cities.size(); i++) {
+            if (cities.get(i).getName().equals(data)) {
+                return cities.get(i);
             }
         }
         return null;
     }
 
-    public void setStartCity(T data) {
+    public void setStartCity(String data) {
         if (this.startCity != null) {
             throw new IllegalStateException("Start city has already been set");
         }
-        Node<T> node = findNode(data);
-        if (node != null) {
-            this.startCity = node;
+        City city = findCity(data);
+        if (city != null) {
+            this.startCity = city;
         }
     }
 
-    public Node<T> getStartCity() {
+    public City getStartCity() {
         return this.startCity;
     }
 
-    public void setFinalCity(T data) {
+    public void setFinalCity(String data) {
         if (this.finalCity != null) {
             throw new IllegalStateException("Final city has already been set");
         }
-        Node<T> node = findNode(data);
-        if (node != null) {
-            this.finalCity = node;
+        City city= findCity(data);
+        if (city != null) {
+            this.finalCity = city;
         }
     }
 
-    public Node<T> getFinalCity() {
+    public City getFinalCity() {
         return this.finalCity;
     }
 
-    public DynamicArray<Node<T>> getNodes() {
-        return this.nodes;
+    public static DynamicArray<City> getCities() {
+        return Grafo.cities;
+    }
+
+    public void printCities() {
+        for (City city : cities) {
+            
+            System.out.println(city.getName());
+        }
+    }
+    
+    public void printEdges() {
+        for (Edge edge : edges) {
+            System.out.println(edge.getPrevious().getName()+"-"+edge.getNext().getName()+"-"+edge.getWeight());
+        }
     }
 }

@@ -50,8 +50,8 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 220, 60));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jLabel1.setText("Nombre");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
+        jLabel1.setText("Ant Colony Optimization");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jButton3.setText("New");

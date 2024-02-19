@@ -10,16 +10,25 @@ import java.util.Random;
  * @author santiagodelcastillo
  */
 public class Ant {
-    private static double alpha = 1.0;
-    private static double beta = 2.0;
-    private static double Q = 1.0;
-
+    private static double alpha;
+    private static double beta;
+    private static double Q;
     private static int cycles;
     private static Random RANDOM = new Random();
-    private Node<City> currentCity;
-    private Node<City> finalCity;
+    private City currentCity;
+    private City finalCity;
+    private static int totalAnts;
 
-    public Ant(Node<City> startCity, Node<City> finalCity) {
+    public static int getTotalAnts() {
+        return totalAnts;
+    }
+
+    public static void setTotalAnts(int totalAnts) {
+        Ant.totalAnts = totalAnts;
+    }
+    
+
+    public Ant(City startCity, City finalCity) {
         this.currentCity = startCity;
         this.finalCity = finalCity;
     }
@@ -50,51 +59,48 @@ public class Ant {
     }
     
     //revisa si se realizo un ciclo
-    public void performCycles(int cycles) {
+   public void performCycles(int cycles) {
         for (int i = 0; i < cycles; i++) {
             while (!currentCity.equals(finalCity)) {
-               currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
+               
+                
+                currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
             }
            updatePheromones();
         }
     }
 
     
-    public Node decideNextCity(Node currentCity){
+    public City decideNextCity(City currentCity){
         DynamicArray probArray = new DynamicArray();
+        DynamicArray adjNodes = new DynamicArray();
+        int len = Grafo.getEdges().size();
+        for(int i = 0; i < len; i++){
+            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){
+                adjNodes.add(Grafo.getEdges().get(i));
+            }
+        }
         double total = 0;
-        for(int i = 0; i < currentCity.getAdjNodes().size(); i++){
-            Node b = (Node) currentCity.getAdjNodes().get(i);
-            City bCity = (City) b.getData();
-            double bCityY = bCity.getyCoordinate();
-            double bCityX = bCity.getyCoordinate();
-            City aCity = (City) currentCity.getData();
-            double aCityY = aCity.getyCoordinate();
-            double aCityX = aCity.getyCoordinate();
-            double distance = Math.sqrt(Math.pow((bCityX - aCityX), 2) + Math.pow((bCityY - aCityY), 2));
-            double nPheromones = (double) currentCity.getAllPheromones().get(i);
+        for(int i = 0; i < adjNodes.size(); i++){
+            Edge sEdge = (Edge) adjNodes.get(i);
+            double distance = sEdge.getWeight();
+            double nPheromones = sEdge.getPheromones();
             total += Math.pow(nPheromones, alpha)*Math.pow(Q/distance, beta);
         }
-        for(int i = 0; i < currentCity.getAdjNodes().size(); i++){
-            Node b = (Node) currentCity.getAdjNodes().get(i);
-            City bCity = (City) b.getData();
-             double bCityY = bCity.getyCoordinate();
-            double bCityX = bCity.getyCoordinate();
-            City aCity = (City) currentCity.getData();
-            double aCityY = aCity.getyCoordinate();
-            double aCityX = aCity.getyCoordinate();
-            double distance = Math.sqrt(Math.pow((bCityX - aCityX), 2) + Math.pow((bCityY - aCityY), 2));
-            double nPheromones = (double) currentCity.getAllPheromones().get(i);
+        for(int i = 0; i < adjNodes.size(); i++){
+            Edge sEdge = (Edge) adjNodes.get(i);
+            double distance = sEdge.getWeight();
+            double nPheromones = sEdge.getPheromones();
             double rs = Math.pow(nPheromones, alpha)*Math.pow(Q/distance, beta);
             int prob = (int) Math.round((rs/total)*100);
             
             for(int a = 0; a < prob; a++){
-                probArray.add(b);
+                probArray.add(sEdge);
             }
         }
            
-            int random = (int) (Math.random()*100);
-            Node city  = (Node) probArray.get(random-1);
+            int random = (int) (Math.random()*1000);
+            City city  = (City) probArray.get(random-1);
             
             
             return city;
@@ -103,6 +109,7 @@ public class Ant {
     }
     
 public void updatePheromones() {
+    
 
     }
     

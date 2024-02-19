@@ -16,17 +16,16 @@ public class GraphVisualizer {
         System.setProperty("org.graphstream.ui", "swing");
         Graph gsGraph = new SingleGraph("Ant Colony Optimization");
 
-        for (Node<City> node : graph.getNodes()) {
-            gsGraph.addNode(node.data.getName());
+        for (City city : graph.getCities()) {
+            gsGraph.addNode(city.getName());
         }
 
-        int edgeId = 0;
-        for (Node<City> node : graph.getNodes()) {
-            for (Node<City> adjNode : node.getAdjNodes()) {
-                gsGraph.addEdge(String.valueOf(edgeId++), node.data.getName(), adjNode.data.getName());
-            }
+        for (Edge edge : graph.getEdges()) {
+            String edgeId = edge.getPrevious().getName() + "-" + edge.getNext().getName();
+            gsGraph.addEdge(edgeId, edge.getPrevious().getName(), edge.getNext().getName());
         }
 
         gsGraph.display();
     }
 }
+
