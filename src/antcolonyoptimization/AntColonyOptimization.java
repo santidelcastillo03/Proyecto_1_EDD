@@ -5,6 +5,8 @@
 package antcolonyoptimization;
 
 import antcolonyoptimization.UI.MainPage;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
 
 /**
  *
@@ -18,8 +20,10 @@ public class AntColonyOptimization {
     private static int rho = 5;
 
     public static void main(String[] args) {
+        MainPage ui = new MainPage();
+        ui.setVisible(true);
         graph = new Grafo<>();
-
+        GraphVisualizer visualizer = new GraphVisualizer();
         
         graph.addCity("New york");
         graph.addCity("Los Angeles");
@@ -34,6 +38,8 @@ public class AntColonyOptimization {
 
         graph.printCities();
         graph.printEdges();
+
+        visualizer.visualize(graph);
         
     }
 
