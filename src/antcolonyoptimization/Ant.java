@@ -13,14 +13,18 @@ public class Ant {
     private static double alpha;
     private static double beta;
     private static double Q;
-    private static int cycles;
     private static Random RANDOM = new Random();
     private City currentCity;
     private City finalCity;
+    private DynamicArray<Edge> pathsTraveled;
+    private double distanceTraveled;
+    
 
     public Ant(City startCity, City finalCity) {
         this.currentCity = startCity;
         this.finalCity = finalCity;
+        this.pathsTraveled = new DynamicArray();
+        this.distanceTraveled = 0;
     }
 
     public static double getAlpha() {
@@ -34,12 +38,7 @@ public class Ant {
     public static double getQ() {
         return Q;
     }
-
-    public static void setCycles(int cycles) {
-        Ant.cycles = cycles;
-    }
     
-
     public static void setAlpha(double alpha) {
         Ant.alpha = alpha;
     }
@@ -48,11 +47,23 @@ public class Ant {
         Ant.beta = beta;
     }
     
- public DynamicArray performCycle() {
-        DynamicArray<Edge> pathsTraveled = new DynamicArray();
+ 
+    public void createColony(int numAnts){
+        for (int i = 0; i < numAnts; i++){
+            Ant newAnt = new Ant(currentCity, finalCity);
+            Simulation.getAnts().add(newAnt);
+        }
+    }
+    
+    
+    public DynamicArray performCycle() {
             while (!currentCity.equals(finalCity)) {
                 Edge path = decideNextCity(currentCity);
                 pathsTraveled.add(path);
+                distanceTraveled += path.getWeight();
+                double pher = path.getPheromones();
+                path.setPheromones(pher + (Simulation.getQ()/distanceTraveled));
+                distanceTraveled += path.getWeight();
                 currentCity = path.getNext(); //decideNextCity es el metodo de probabilidad de la hormiga
             }
            currentCity = Grafo.getStartCity();
@@ -98,8 +109,10 @@ public class Ant {
     }
     
 public void updatePheromones() {
+    double rho = Simulation.getRho();
     for (int i = 0; i < Grafo.getEdges().size(); i++){
-       Grafo.getEdges().get(i).setPheromones(0);
+       double pher = Grafo.getEdges().get(i).getPheromones();
+       Grafo.getEdges().get(i).setPheromones(pher*(1-rho));
     }
 
     }

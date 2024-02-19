@@ -15,8 +15,8 @@ import javax.swing.*;
 public class Grafo<T> {
     private static DynamicArray<City> cities;
     private static DynamicArray<Edge> edges;
-    private City startCity;
-    private City finalCity;
+    private static City startCity;
+    private static City finalCity;
 
     public Grafo() {
         cities = new DynamicArray<>();
@@ -93,8 +93,8 @@ public class Grafo<T> {
         }
     }
 
-    public City getStartCity() {
-        return this.startCity;
+    public static City getStartCity() {
+        return startCity;
     }
 
     public void setFinalCity(T data) {
