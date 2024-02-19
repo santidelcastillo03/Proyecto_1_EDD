@@ -42,6 +42,20 @@ public class Node<T> {
         return this.adjNodes;
     }
 
-    
-    
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public DynamicArray<Double> getAllPheromones() {
+        return pheromones;
+    }
+
+    public void setAllPheromones(DynamicArray<Double> pheromones) {
+        this.pheromones = pheromones;
+    }
+   
 }
