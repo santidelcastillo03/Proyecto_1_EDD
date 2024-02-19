@@ -18,6 +18,7 @@ public class Edge {
         this.previous = previous;
         this.weight = weight;
         this.next = next;
+        this.pheromones = 1/Grafo.getCities().size();
     }
 
     public City getPrevious() {
@@ -51,6 +52,6 @@ public class Edge {
     public void setPheromones(double pheromones) {
         this.pheromones = pheromones;
     }
-
-
+    
+    
 }    

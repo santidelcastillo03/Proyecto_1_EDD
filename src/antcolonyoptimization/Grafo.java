@@ -15,8 +15,8 @@ import javax.swing.*;
 public class Grafo<T> {
     private static DynamicArray<City> cities;
     private static DynamicArray<Edge> edges;
-    private City startCity;
-    private City finalCity;
+    private static City startCity;
+    private static City finalCity;
 
     public Grafo() {
         cities = new DynamicArray<>();
@@ -25,14 +25,14 @@ public class Grafo<T> {
     
     
 
-    public void addCity(T data) {
+    public void addCity(String data) {
         if (cities.size() >= 20) {
             JOptionPane.showMessageDialog(null,"you can't add more cities");
         }
-        cities.add(new City((String) data));
+        cities.add(new City(data));
     }
 
-    public Edge addEdge(T data1, T data2, double weight) {
+    public Edge addEdge(String data1, String data2, double weight) {
         City city1 = findCity(data1);
         City city2 = findCity(data2);
         if (city1 != null && city2 != null) {
@@ -49,7 +49,7 @@ public class Grafo<T> {
     public void setCities(DynamicArray<City> cities) {
         this.cities = cities;
     }
-
+    
     public void setEdges(DynamicArray<Edge> edges) {
         this.edges = edges;
     }
@@ -59,7 +59,7 @@ public class Grafo<T> {
         return edges;
     }
 
-    public void removeEdge(T data1, T data2) {
+    public void removeEdge(String data1, String data2) {
         City city1 = findCity(data1);
         City city2 = findCity(data2);
         if (city1 != null && city2 != null) {
@@ -74,16 +74,16 @@ public class Grafo<T> {
         }
     }
 
-    private City findCity(T data) {
+    private City findCity(String data) {
         for (int i = 0; i < cities.size(); i++) {
-            if (cities.get(i).equals(data)) {
+            if (cities.get(i).getName().equals(data)) {
                 return cities.get(i);
             }
         }
         return null;
     }
 
-    public void setStartCity(T data) {
+    public void setStartCity(String data) {
         if (this.startCity != null) {
             throw new IllegalStateException("Start city has already been set");
         }
@@ -97,7 +97,7 @@ public class Grafo<T> {
         return this.startCity;
     }
 
-    public void setFinalCity(T data) {
+    public void setFinalCity(String data) {
         if (this.finalCity != null) {
             throw new IllegalStateException("Final city has already been set");
         }
@@ -111,7 +111,20 @@ public class Grafo<T> {
         return this.finalCity;
     }
 
-    public DynamicArray<City> getCities() {
-        return this.cities;
+    public static DynamicArray<City> getCities() {
+        return Grafo.cities;
+    }
+
+    public void printCities() {
+        for (City city : cities) {
+            
+            System.out.println(city.getName());
+        }
+    }
+    
+    public void printEdges() {
+        for (Edge edge : edges) {
+            System.out.println(edge.getPrevious().getName()+"-"+edge.getNext().getName()+"-"+edge.getWeight());
+        }
     }
 }
