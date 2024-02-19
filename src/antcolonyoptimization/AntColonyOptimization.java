@@ -35,7 +35,7 @@ public class AntColonyOptimization {
 
         graph.setStartCity("New york");
         graph.setFinalCity("Chicago");
-
+        
         graph.printCities();
         graph.printEdges();
 
@@ -43,16 +43,6 @@ public class AntColonyOptimization {
         
     }
 
-    public static void antGroup(int totalAnts, int cycles) {
-        Ant.setTotalAnts(totalAnts);
-
-        for (int i = 0; i < Ant.getTotalAnts(); i++) {
-            Ant ant = new Ant(graph.getStartCity(), graph.getFinalCity());
-            ant.performCycles(cycles);
-        }
-
-        
-    }
     
 }
 

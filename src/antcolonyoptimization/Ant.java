@@ -59,7 +59,7 @@ public class Ant {
     }
     
     //revisa si se realizo un ciclo
-    public void performCycles(int cycles) {
+   public void performCycles(int cycles) {
         for (int i = 0; i < cycles; i++) {
             while (!currentCity.equals(finalCity)) {
                

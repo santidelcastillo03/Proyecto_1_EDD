@@ -46,6 +46,24 @@ public class Grafo<T> {
         }
     }
 
+    public void removeCity(String cityName) {
+        City cityToRemove = findCity(cityName);
+        if (cityToRemove != null) {
+            int cityIndex = cities.indexOf(cityToRemove);
+            if (cityIndex != -1) {
+                cities.remove(cityIndex);
+            }
+
+            for (int i = edges.size() - 1; i >= 0; i--) {
+                Edge edge = edges.get(i);
+                if (edge.getPrevious().equals(cityToRemove) || edge.getNext().equals(cityToRemove)) {
+                    edges.remove(i);
+                }
+            }
+        }
+    }
+    
+
     public void setCities(DynamicArray<City> cities) {
         this.cities = cities;
     }
