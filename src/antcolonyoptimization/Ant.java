@@ -13,24 +13,18 @@ public class Ant {
     private static double alpha;
     private static double beta;
     private static double Q;
-    private static int cycles;
     private static Random RANDOM = new Random();
     private City currentCity;
     private City finalCity;
-    private static int totalAnts;
-
-    public static int getTotalAnts() {
-        return totalAnts;
-    }
-
-    public static void setTotalAnts(int totalAnts) {
-        Ant.totalAnts = totalAnts;
-    }
+    private DynamicArray<Edge> pathsTraveled;
+    private double distanceTraveled;
     
 
     public Ant(City startCity, City finalCity) {
         this.currentCity = startCity;
         this.finalCity = finalCity;
+        this.pathsTraveled = new DynamicArray();
+        this.distanceTraveled = 0;
     }
 
     public static double getAlpha() {
@@ -44,12 +38,7 @@ public class Ant {
     public static double getQ() {
         return Q;
     }
-
-    public static void setCycles(int cycles) {
-        Ant.cycles = cycles;
-    }
     
-
     public static void setAlpha(double alpha) {
         Ant.alpha = alpha;
     }
@@ -58,20 +47,31 @@ public class Ant {
         Ant.beta = beta;
     }
     
-    //revisa si se realizo un ciclo
-   public void performCycles(int cycles) {
-        for (int i = 0; i < cycles; i++) {
-            while (!currentCity.equals(finalCity)) {
-               
-                
-                currentCity = decideNextCity(currentCity); //decideNextCity es el metodo de probabilidad de la hormiga
-            }
-           updatePheromones();
+ 
+    public void createColony(int numAnts){
+        for (int i = 0; i < numAnts; i++){
+            Ant newAnt = new Ant(currentCity, finalCity);
+            Simulation.getAnts().add(newAnt);
         }
+    }
+    
+    
+    public DynamicArray performCycle() {
+            while (!currentCity.equals(finalCity)) {
+                Edge path = decideNextCity(currentCity);
+                pathsTraveled.add(path);
+                distanceTraveled += path.getWeight();
+                double pher = path.getPheromones();
+                path.setPheromones(pher + (Simulation.getQ()/distanceTraveled));
+                distanceTraveled += path.getWeight();
+                currentCity = path.getNext(); //decideNextCity es el metodo de probabilidad de la hormiga
+            }
+           currentCity = Grafo.getStartCity();
+        return pathsTraveled;
     }
 
     
-    public City decideNextCity(City currentCity){
+    public Edge decideNextCity(City currentCity){
         DynamicArray probArray = new DynamicArray();
         DynamicArray adjNodes = new DynamicArray();
         int len = Grafo.getEdges().size();
@@ -100,17 +100,22 @@ public class Ant {
         }
            
             int random = (int) (Math.random()*1000);
-            City city  = (City) probArray.get(random-1);
+            Edge selEdge  = (Edge) probArray.get(random-1);
             
             
-            return city;
+            return selEdge;
             
         
     }
     
 public void updatePheromones() {
-    
+    double rho = Simulation.getRho();
+    for (int i = 0; i < Grafo.getEdges().size(); i++){
+       double pher = Grafo.getEdges().get(i).getPheromones();
+       Grafo.getEdges().get(i).setPheromones(pher*(1-rho));
+    }
 
     }
     
 }
+
