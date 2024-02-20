@@ -141,13 +141,14 @@ public class NewSim extends javax.swing.JFrame {
         double beta = Double.parseDouble(BetaInput.getText());
         double rho = Double.parseDouble(RhoInput.getText());
         double qValue = Double.parseDouble(QInput.getText());
-        
-        Simulation.setCycles(cycles);
-        Simulation.setNumAnts(antAmount);
-        Simulation.setQ(qValue);
-        Simulation.setAlpha(alpha);
-        Simulation.setBeta(beta);
-        Simulation.setRho(rho);
+
+        Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount);
+        simulation.setCycles(cycles);
+        simulation.setNumAnts(antAmount);
+        simulation.setQ(qValue);
+        simulation.setAlpha(alpha);
+        simulation.setBeta(beta);
+        simulation.setRho(rho);
         
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "All fields must be numbers");
