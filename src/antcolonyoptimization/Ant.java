@@ -87,6 +87,11 @@ public class Ant {
             double nPheromones = sEdge.getPheromones();
             total += Math.pow(nPheromones, alpha)*Math.pow(Q/distance, beta);
         }
+        if (total == 0){
+            for (int a=0; a < adjNodes.size(); a++){
+                probArray.add(adjNodes.get(a));
+            }
+        }else{
         for(int i = 0; i < adjNodes.size(); i++){
             Edge sEdge = (Edge) adjNodes.get(i);
             double distance = sEdge.getWeight();
@@ -98,12 +103,11 @@ public class Ant {
                 probArray.add(sEdge);
             }
         }
-           
-            int random = (int) (Math.random()*1000);
-            Edge selEdge  = (Edge) probArray.get(random-1);
-            
-            
-            return selEdge;
+        }
+           Random rand = new Random();
+           int random = (int) rand.nextInt(adjNodes.size());
+           Edge selEdge  = (Edge) probArray.get(random);
+           return selEdge;
             
         
     }
