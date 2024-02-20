@@ -125,8 +125,8 @@ public class Grafo<T> {
         }
     }
 
-    public City getFinalCity() {
-        return this.finalCity;
+    public static City getFinalCity() {
+        return finalCity;
     }
 
     public static DynamicArray<City> getCities() {
