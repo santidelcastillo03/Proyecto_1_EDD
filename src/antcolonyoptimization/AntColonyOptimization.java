@@ -35,7 +35,7 @@ public class AntColonyOptimization {
 
         graph.setStartCity("New york");
         graph.setFinalCity("Chicago");
-        
+              
         graph.printCities();
         graph.printEdges();
 

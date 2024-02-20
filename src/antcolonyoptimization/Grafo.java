@@ -111,8 +111,8 @@ public class Grafo<T> {
         }
     }
 
-    public City getStartCity() {
-        return this.startCity;
+    public static City getStartCity() {
+        return Grafo.startCity;
     }
 
     public void setFinalCity(String data) {
