@@ -58,7 +58,7 @@ public class Ant {
     
     
     public DynamicArray performCycle() {
-            while (!currentCity.equals(finalCity)) {
+            while (currentCity != finalCity) {
                 Edge path = decideNextCity(currentCity);
                 pathsTraveled.add(path);
                 distanceTraveled += path.getWeight();

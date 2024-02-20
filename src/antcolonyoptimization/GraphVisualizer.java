@@ -28,4 +28,3 @@ public class GraphVisualizer {
         gsGraph.display();
     }
 }
-
