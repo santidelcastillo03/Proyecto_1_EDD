@@ -14,10 +14,10 @@ public class Ant {
     private static double beta;
     private static double Q;
     private static Random RANDOM = new Random();
-    private City currentCity;
-    private City finalCity;
-    private DynamicArray<Edge> pathsTraveled;
-    private double distanceTraveled;
+    private static City currentCity;
+    private static City finalCity;
+    private static DynamicArray<Edge> pathsTraveled;
+    private static double distanceTraveled;
     
 
     public Ant(City startCity, City finalCity) {
@@ -48,11 +48,12 @@ public class Ant {
     }
     
  
-    public void createColony(int numAnts){
+    public static DynamicArray createColony(int numAnts){
         for (int i = 0; i < numAnts; i++){
             Ant newAnt = new Ant(currentCity, finalCity);
             Simulation.getAnts().add(newAnt);
         }
+        return Simulation.getAnts();
     }
     
     
@@ -112,7 +113,7 @@ public class Ant {
         
     }
     
-public void updatePheromones() {
+    public static void updatePheromones() {
     double rho = Simulation.getRho();
     for (int i = 0; i < Grafo.getEdges().size(); i++){
        double pher = Grafo.getEdges().get(i).getPheromones();

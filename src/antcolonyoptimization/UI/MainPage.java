@@ -10,7 +10,7 @@ package antcolonyoptimization.UI;
  */
 public class MainPage extends javax.swing.JFrame {
     NewSim newSim = new NewSim();
-    LoadSim loadSim = new LoadSim();
+
     /**
      * Creates new form MainPage
      */
@@ -74,7 +74,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        loadSim.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

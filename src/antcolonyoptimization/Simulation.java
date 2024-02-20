@@ -17,15 +17,7 @@ public class Simulation {
     private static DynamicArray<Ant> ants;
     private static int cycles;
     private static Grafo<City> graph;
-
-    public static double getQ() {
-        return q;
-    }
-
-    public static void setQ(double q) {
-        Simulation.q = q;
-    }
-   
+    
     public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
         this.alpha = alpha;
         this.beta = beta;
@@ -33,45 +25,51 @@ public class Simulation {
         this.rho = rho;
         this.cycles = cycles;
     }
+    public static double getQ() {
+        return q;
+    }
 
+    public static void setQ(double q) {
+        Simulation.q = q;
+    }
     public static double getAlpha() {
         return alpha;
     }
 
-    public static void setAlpha(double alpha) {
-        Simulation.alpha = alpha;
+    public void setAlpha(double alpha) {
+        this.alpha = alpha;
     }
 
     public static double getBeta() {
         return beta;
     }
 
-    public static void setBeta(double beta) {
-        Simulation.beta = beta;
+    public void setBeta(double beta) {
+        this.beta = beta;
     }
 
     public static double getRho() {
         return rho;
     }
 
-    public static void setRho(double rho) {
-        Simulation.rho = rho;
+    public void setRho(double rho) {
+        this.rho = rho;
     }
 
     public static int getNumAnts() {
         return numAnts;
     }
 
-    public static void setNumAnts(int numAnts) {
-        Simulation.numAnts = numAnts;
+    public void setNumAnts(int numAnts) {
+        this.numAnts = numAnts;
     }
 
     public static int getCycles() {
         return cycles;
     }
 
-    public static void setCycles(int cycles) {
-        Simulation.cycles = cycles;
+    public void setCycles(int cycles) {
+        this.cycles = cycles;
     }
 
     public static Grafo<City> getGraph() {
@@ -90,9 +88,39 @@ public class Simulation {
         Simulation.ants = ants;
     }
         
-      public void run() {
-          
+    
+    public static DynamicArray shortestPath(){
+      DynamicArray <Edge> shortestPath = new DynamicArray();
+      City currentCity = Grafo.getStartCity();
+      while(!currentCity.equals(Grafo.getFinalCity())){
+        DynamicArray<Edge> adjNodes = new DynamicArray();
+        int len = Grafo.getEdges().size();
+        for(int i = 0; i < len; i++){
+            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){
+                adjNodes.add(Grafo.getEdges().get(i));
+            }
+            double pointer = adjNodes.get(0).getPheromones();
+        for(int a = 1; a < adjNodes.size(); a++){
+            if(pointer < adjNodes.get(a).getPheromones()){
+                shortestPath.add(adjNodes.get(a));
+                currentCity = adjNodes.get(a).getNext();
+                pointer = adjNodes.get(a).getPheromones();
+            }
+        }
       }
     
+    }
+      return shortestPath;
+    }
     
-}
+      public static DynamicArray run() {
+          DynamicArray<Ant> colony = Ant.createColony(numAnts);
+          for (int a = 0; a < cycles; a++){
+              for (int i = 0; i < colony.size(); i++){
+              colony.get(i).performCycle();
+          } Ant.updatePheromones();
+      }
+            DynamicArray<Edge> result = shortestPath();
+            return result;
+     }
+     }
