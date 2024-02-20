@@ -4,12 +4,17 @@
  */
 package antcolonyoptimization.UI;
 
+import antcolonyoptimization.Simulation;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author santiagodelcastillo
  */
 public class NewSim extends javax.swing.JFrame {
     AddCity addCity = new AddCity();
+    
+    
     /**
      * Creates new form AddCity
      */
@@ -28,22 +33,23 @@ public class NewSim extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        StartSimBu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BackBu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CyclesInput = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        AAInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        AlphaInput = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        BetaInput = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        RhoInput = new javax.swing.JTextField();
+        AddValuesBu = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        QInput = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,49 +57,60 @@ public class NewSim extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, -1, -1));
 
-        jButton1.setText("Start Simulation");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 560, -1, -1));
+        StartSimBu.setText("Start Simulation");
+        getContentPane().add(StartSimBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 560, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("New Simulation");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
-        jButton2.setText("<< Back");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
+        BackBu.setText("<< Back");
+        BackBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BackBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
 
         jLabel2.setText("Cycles:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+        getContentPane().add(CyclesInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, -1));
 
         jLabel3.setText("Ant amount:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        AAInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                AAInputActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+        getContentPane().add(AAInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 80, -1));
 
         jLabel4.setText("Alpha value:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
+
+        AlphaInput.setText("1.0");
+        getContentPane().add(AlphaInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 80, -1));
 
         jLabel5.setText("Beta value:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+
+        BetaInput.setText("2.0");
+        getContentPane().add(BetaInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 80, -1));
 
         jLabel8.setText("Rho value:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, -1));
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        RhoInput.setText("0.5");
+        getContentPane().add(RhoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 80, -1));
+
+        AddValuesBu.setText("Add");
+        AddValuesBu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AddValuesBuActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
+        getContentPane().add(AddValuesBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
 
         jButton4.setText("New city");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -103,24 +120,48 @@ public class NewSim extends javax.swing.JFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, -1, -1));
 
-        jLabel9.setText("Este boton abrira una ventanita para agergar ciudades");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, -1, -1));
+        jLabel6.setText("Q value:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
+
+        QInput.setText("1.0");
+        getContentPane().add(QInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void AAInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AAInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_AAInputActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void AddValuesBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddValuesBuActionPerformed
+        try {
+        int cycles = Integer.parseInt(CyclesInput.getText());
+        int antAmount = Integer.parseInt(AAInput.getText());
+        double alpha = Double.parseDouble(AlphaInput.getText());
+        double beta = Double.parseDouble(BetaInput.getText());
+        double rho = Double.parseDouble(RhoInput.getText());
+        double qValue = Double.parseDouble(QInput.getText());
+        
+        Simulation.setCycles(cycles);
+        Simulation.setNumAnts(antAmount);
+        Simulation.setQ(qValue);
+        Simulation.setAlpha(alpha);
+        Simulation.setBeta(beta);
+        Simulation.setRho(rho);
+        
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "All fields must be numbers");
+        }
+    }//GEN-LAST:event_AddValuesBuActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         addCity.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed
+        
+    }//GEN-LAST:event_BackBuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,22 +200,23 @@ public class NewSim extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField AAInput;
+    private javax.swing.JButton AddValuesBu;
+    private javax.swing.JTextField AlphaInput;
+    private javax.swing.JButton BackBu;
+    private javax.swing.JTextField BetaInput;
+    private javax.swing.JTextField CyclesInput;
+    private javax.swing.JTextField QInput;
+    private javax.swing.JTextField RhoInput;
+    private javax.swing.JButton StartSimBu;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

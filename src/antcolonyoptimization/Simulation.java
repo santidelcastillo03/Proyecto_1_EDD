@@ -13,14 +13,6 @@ public class Simulation {
     private static double beta;
     private static double rho;
     private static double q;
-
-    public static double getQ() {
-        return q;
-    }
-
-    public static void setQ(double q) {
-        Simulation.q = q;
-    }
     private static int numAnts;
     private static DynamicArray<Ant> ants;
     private static int cycles;
@@ -33,7 +25,13 @@ public class Simulation {
         this.rho = rho;
         this.cycles = cycles;
     }
+    public static double getQ() {
+        return q;
+    }
 
+    public static void setQ(double q) {
+        Simulation.q = q;
+    }
     public static double getAlpha() {
         return alpha;
     }
@@ -90,9 +88,39 @@ public class Simulation {
         Simulation.ants = ants;
     }
         
-      public void run() {
-          
+    
+    public static DynamicArray shortestPath(){
+      DynamicArray <Edge> shortestPath = new DynamicArray();
+      City currentCity = Grafo.getStartCity();
+      while(!currentCity.equals(Grafo.getFinalCity())){
+        DynamicArray<Edge> adjNodes = new DynamicArray();
+        int len = Grafo.getEdges().size();
+        for(int i = 0; i < len; i++){
+            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){
+                adjNodes.add(Grafo.getEdges().get(i));
+            }
+            double pointer = adjNodes.get(0).getPheromones();
+        for(int a = 1; a < adjNodes.size(); a++){
+            if(pointer < adjNodes.get(a).getPheromones()){
+                shortestPath.add(adjNodes.get(a));
+                currentCity = adjNodes.get(a).getNext();
+                pointer = adjNodes.get(a).getPheromones();
+            }
+        }
       }
     
+    }
+      return shortestPath;
+    }
     
-}
+      public static DynamicArray run() {
+          DynamicArray<Ant> colony = Ant.createColony(numAnts);
+          for (int a = 0; a < cycles; a++){
+              for (int i = 0; i < colony.size(); i++){
+              colony.get(i).performCycle();
+          } Ant.updatePheromones();
+      }
+            DynamicArray<Edge> result = shortestPath();
+            return result;
+     }
+     }

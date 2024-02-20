@@ -25,14 +25,14 @@ public class Grafo<T> {
     
     
 
-    public void addCity(T data) {
+    public void addCity(String data) {
         if (cities.size() >= 20) {
             JOptionPane.showMessageDialog(null,"you can't add more cities");
         }
-        cities.add(new City((String) data));
+        cities.add(new City(data));
     }
 
-    public Edge addEdge(T data1, T data2, double weight) {
+    public Edge addEdge(String data1, String data2, double weight) {
         City city1 = findCity(data1);
         City city2 = findCity(data2);
         if (city1 != null && city2 != null) {
@@ -46,10 +46,28 @@ public class Grafo<T> {
         }
     }
 
+    public void removeCity(String cityName) {
+        City cityToRemove = findCity(cityName);
+        if (cityToRemove != null) {
+            int cityIndex = cities.indexOf(cityToRemove);
+            if (cityIndex != -1) {
+                cities.remove(cityIndex);
+            }
+
+            for (int i = edges.size() - 1; i >= 0; i--) {
+                Edge edge = edges.get(i);
+                if (edge.getPrevious().equals(cityToRemove) || edge.getNext().equals(cityToRemove)) {
+                    edges.remove(i);
+                }
+            }
+        }
+    }
+    
+
     public void setCities(DynamicArray<City> cities) {
         this.cities = cities;
     }
-
+    
     public void setEdges(DynamicArray<Edge> edges) {
         this.edges = edges;
     }
@@ -59,7 +77,7 @@ public class Grafo<T> {
         return edges;
     }
 
-    public void removeEdge(T data1, T data2) {
+    public void removeEdge(String data1, String data2) {
         City city1 = findCity(data1);
         City city2 = findCity(data2);
         if (city1 != null && city2 != null) {
@@ -74,16 +92,16 @@ public class Grafo<T> {
         }
     }
 
-    private City findCity(T data) {
+    private City findCity(String data) {
         for (int i = 0; i < cities.size(); i++) {
-            if (cities.get(i).equals(data)) {
+            if (cities.get(i).getName().equals(data)) {
                 return cities.get(i);
             }
         }
         return null;
     }
 
-    public void setStartCity(T data) {
+    public void setStartCity(String data) {
         if (this.startCity != null) {
             throw new IllegalStateException("Start city has already been set");
         }
@@ -94,10 +112,10 @@ public class Grafo<T> {
     }
 
     public static City getStartCity() {
-        return startCity;
+        return Grafo.startCity;
     }
 
-    public void setFinalCity(T data) {
+    public void setFinalCity(String data) {
         if (this.finalCity != null) {
             throw new IllegalStateException("Final city has already been set");
         }
@@ -107,11 +125,51 @@ public class Grafo<T> {
         }
     }
 
-    public City getFinalCity() {
-        return this.finalCity;
+    public static City getFinalCity() {
+        return finalCity;
     }
 
     public static DynamicArray<City> getCities() {
-        return cities;
+        return Grafo.cities;
+    }
+
+    public void printCities() {
+        for (City city : cities) {
+            
+            System.out.println(city.getName());
+        }
+    }
+    
+    public void printEdges() {
+        for (Edge edge : edges) {
+            System.out.println(edge.getPrevious().getName()+"-"+edge.getNext().getName()+"-"+edge.getWeight());
+        }
+    }
+    
+    public boolean cityExists(String cityName) {
+        for (City city : this.getCities()) {
+            if (city.getName().equals(cityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+      public boolean startCityExists() {
+        return this.getStartCity() != null;
+    }
+
+    public boolean finalCityExists() {
+        return this.getFinalCity() != null;
+    }
+    
+     public boolean connectionExists(String cityName1, String cityName2) {
+        for (Edge edge : this.getEdges()) {
+            if ((edge.getPrevious().getName().equals(cityName1) && edge.getNext().getName().equals(cityName2)) ||
+                (edge.getPrevious().getName().equals(cityName2) && edge.getNext().getName().equals(cityName1))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
