@@ -124,4 +124,19 @@ public class Simulation {
             DynamicArray<Edge> result = shortestPath();
             return result;
      }
+      
+      public static String printShortestPath(DynamicArray<Edge> shortestPath) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shortest path:\n");
+        for (int i = 0; i < shortestPath.size(); i++) {
+            Edge edge = shortestPath.get(i);
+            sb.append(edge.getPrevious().getName())
+              .append(" -> ")
+              .append(edge.getNext().getName())
+              .append(" : ")
+              .append(edge.getWeight())
+              .append("\n");
+        }
+        return sb.toString();
+    }
      }

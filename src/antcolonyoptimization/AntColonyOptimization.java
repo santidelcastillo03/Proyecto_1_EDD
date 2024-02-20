@@ -36,12 +36,12 @@ public class AntColonyOptimization {
 
 
         DynamicArray<Edge> shortestPath = simulation.run();
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
+        System.out.println(shortestPathString);
 
-        System.out.println("Shortest path: " + shortestPath);
-        
               
 
-
+        visualizer.displayShortestPath(shortestPath);
         visualizer.visualize(graph);
         
     }
