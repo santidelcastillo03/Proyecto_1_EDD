@@ -145,4 +145,31 @@ public class Grafo<T> {
             System.out.println(edge.getPrevious().getName()+"-"+edge.getNext().getName()+"-"+edge.getWeight());
         }
     }
+    
+    public boolean cityExists(String cityName) {
+        for (City city : this.getCities()) {
+            if (city.getName().equals(cityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+      public boolean startCityExists() {
+        return this.getStartCity() != null;
+    }
+
+    public boolean finalCityExists() {
+        return this.getFinalCity() != null;
+    }
+    
+     public boolean connectionExists(String cityName1, String cityName2) {
+        for (Edge edge : this.getEdges()) {
+            if ((edge.getPrevious().getName().equals(cityName1) && edge.getNext().getName().equals(cityName2)) ||
+                (edge.getPrevious().getName().equals(cityName2) && edge.getNext().getName().equals(cityName1))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

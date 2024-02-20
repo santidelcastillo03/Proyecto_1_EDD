@@ -4,18 +4,23 @@
  */
 package antcolonyoptimization.UI;
 
+import antcolonyoptimization.City;
+import antcolonyoptimization.Grafo;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Santiago
  */
 public class AddCity extends javax.swing.JFrame {
-
+    private Grafo<City> graph;
+    
     /**
      * Creates new form AddCity
      */
     public AddCity() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.graph = new Grafo<>();
     }
 
     /**
@@ -28,16 +33,20 @@ public class AddCity extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cityNameInput = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AddCityBu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        cTo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cFrom = new javax.swing.JTextField();
+        connectCityBu = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        distanceInput = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,27 +54,32 @@ public class AddCity extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Start city", "City", "Destination city" }));
+        combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
+        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         jLabel1.setText("City name:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
-        jLabel2.setText("City Property");
+        jLabel2.setText("City property");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 110, -1));
+        getContentPane().add(cityNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 110, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel5.setText("Add City");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
-        jButton1.setText("Add");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
+        AddCityBu.setText("Add city");
+        AddCityBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCityBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AddCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,12 +89,25 @@ public class AddCity extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
-        jLabel6.setText("connect to:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+        jLabel6.setText("Connect to:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        getContentPane().add(cTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 100, -1));
 
-        jLabel7.setText("( city name )");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
+        jLabel3.setText("Connect from:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
+        getContentPane().add(cFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 100, -1));
+
+        connectCityBu.setText("Connect");
+        connectCityBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectCityBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(connectCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+
+        jLabel4.setText("Distance:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
+        getContentPane().add(distanceInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -89,9 +116,74 @@ public class AddCity extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
+        
+    }//GEN-LAST:event_comboActionPerformed
+
+    private void connectCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectCityBuActionPerformed
+        String cityFrom = this.cFrom.getText();
+    String cityTo = this.cTo.getText();
+    String distanceStr = this.distanceInput.getText();
+
+    if (cityFrom.isEmpty() || cityTo.isEmpty() || distanceStr.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "All fields must be filled");
+        return;
+    }
+
+    double distance;
+    try {
+        distance = Integer.parseInt(distanceStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Distance must be a number");
+        return;
+    }
+
+    if (!graph.cityExists(cityFrom) || !graph.cityExists(cityTo)) {
+        JOptionPane.showMessageDialog(null, "Both cities must exist in the graph");
+        return;
+    }
+    
+    if (graph.connectionExists(cityFrom, cityTo)) {
+        JOptionPane.showMessageDialog(null, "Connection already exists");
+        return;
+    }
+
+        graph.addEdge(cityFrom, cityTo, distance); 
+        cFrom.setText("");
+        cTo.setText("");
+        distanceInput.setText("");
+    }//GEN-LAST:event_connectCityBuActionPerformed
+
+    private void AddCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCityBuActionPerformed
+        
+        if (this.cityNameInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "City name cannot be empty");
+            return;
+        }
+    
+        if (this.combo.getSelectedItem() == "Start city") {
+        graph.addCity(this.cityNameInput.getText());
+        if (!graph.startCityExists()) {
+            graph.setStartCity(this.cityNameInput.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Start city already exists");
+        }
+    } else if (this.combo.getSelectedItem() == "Destination city") {
+        graph.addCity(this.cityNameInput.getText());
+        if (!graph.finalCityExists()) {
+            graph.setFinalCity(this.cityNameInput.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Destination city already exists");
+        }
+    } else {
+        if (graph.cityExists(this.cityNameInput.getText()) == false) {
+            graph.addCity(this.cityNameInput.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "This city already exists");
+        }
+    }
+    cityNameInput.setText("");
+    }//GEN-LAST:event_AddCityBuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,16 +221,20 @@ public class AddCity extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton AddCityBu;
+    private javax.swing.JTextField cFrom;
+    private javax.swing.JTextField cTo;
+    private javax.swing.JTextField cityNameInput;
+    private javax.swing.JComboBox<String> combo;
+    private javax.swing.JButton connectCityBu;
+    private javax.swing.JTextField distanceInput;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

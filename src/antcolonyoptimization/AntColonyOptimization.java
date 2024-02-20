@@ -33,13 +33,12 @@ public class AntColonyOptimization {
         graph.addEdge("Los Angeles", "Chicago", 2014);
         graph.addEdge("Chicago", "New york", 790);
 
-        graph.setStartCity("New york");
-        graph.setFinalCity("Chicago");
+        
               
         graph.printCities();
         graph.printEdges();
 
-        visualizer.visualize(graph);
+        //visualizer.visualize(graph);
         
     }
 

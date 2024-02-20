@@ -13,6 +13,10 @@ public class Simulation {
     private static double beta;
     private static double rho;
     private static double q;
+    private static int numAnts;
+    private static DynamicArray<Ant> ants;
+    private static int cycles;
+    private static Grafo<City> graph;
 
     public static double getQ() {
         return q;
@@ -21,11 +25,7 @@ public class Simulation {
     public static void setQ(double q) {
         Simulation.q = q;
     }
-    private static int numAnts;
-    private static DynamicArray<Ant> ants;
-    private static int cycles;
-    private static Grafo<City> graph;
-    
+   
     public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
         this.alpha = alpha;
         this.beta = beta;
@@ -38,40 +38,40 @@ public class Simulation {
         return alpha;
     }
 
-    public void setAlpha(double alpha) {
-        this.alpha = alpha;
+    public static void setAlpha(double alpha) {
+        Simulation.alpha = alpha;
     }
 
     public static double getBeta() {
         return beta;
     }
 
-    public void setBeta(double beta) {
-        this.beta = beta;
+    public static void setBeta(double beta) {
+        Simulation.beta = beta;
     }
 
     public static double getRho() {
         return rho;
     }
 
-    public void setRho(double rho) {
-        this.rho = rho;
+    public static void setRho(double rho) {
+        Simulation.rho = rho;
     }
 
     public static int getNumAnts() {
         return numAnts;
     }
 
-    public void setNumAnts(int numAnts) {
-        this.numAnts = numAnts;
+    public static void setNumAnts(int numAnts) {
+        Simulation.numAnts = numAnts;
     }
 
     public static int getCycles() {
         return cycles;
     }
 
-    public void setCycles(int cycles) {
-        this.cycles = cycles;
+    public static void setCycles(int cycles) {
+        Simulation.cycles = cycles;
     }
 
     public static Grafo<City> getGraph() {
