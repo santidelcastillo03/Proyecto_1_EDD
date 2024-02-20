@@ -14,16 +14,15 @@ import org.graphstream.graph.implementations.SingleGraph;
  */
 public class AntColonyOptimization {
     private static Grafo<City> graph;
-    private static double alpha = 1.0;
-    private static double beta = 1.0;
-    private static int cycles = 100;
-    private static int rho = 5;
+    
 
     public static void main(String[] args) {
         MainPage ui = new MainPage();
         ui.setVisible(true);
         graph = new Grafo<>();
         GraphVisualizer visualizer = new GraphVisualizer();
+        
+        Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 50);
         
         graph.addCity("New york");
         graph.addCity("Los Angeles");
@@ -32,13 +31,18 @@ public class AntColonyOptimization {
         graph.addEdge("New york", "Los Angeles", 2451);
         graph.addEdge("Los Angeles", "Chicago", 2014);
         graph.addEdge("Chicago", "New york", 790);
-
         
-              
-        graph.printCities();
-        graph.printEdges();
+        simulation.run();
 
-        //visualizer.visualize(graph);
+
+        DynamicArray<Edge> shortestPath = simulation.run();
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
+        System.out.println(shortestPathString);
+
+              
+
+        visualizer.displayShortestPath(shortestPath);
+        visualizer.visualize(graph);
         
     }
 

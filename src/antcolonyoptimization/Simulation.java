@@ -24,6 +24,7 @@ public class Simulation {
         this.numAnts = numAnts;
         this.rho = rho;
         this.cycles = cycles;
+        this.ants = new DynamicArray<>();
     }
     public static double getQ() {
         return q;
@@ -92,7 +93,7 @@ public class Simulation {
     public static DynamicArray shortestPath(){
       DynamicArray <Edge> shortestPath = new DynamicArray();
       City currentCity = Grafo.getStartCity();
-      while(!currentCity.equals(Grafo.getFinalCity())){
+      while(currentCity != Grafo.getFinalCity()){
         DynamicArray<Edge> adjNodes = new DynamicArray();
         int len = Grafo.getEdges().size();
         for(int i = 0; i < len; i++){
@@ -123,4 +124,19 @@ public class Simulation {
             DynamicArray<Edge> result = shortestPath();
             return result;
      }
+      
+      public static String printShortestPath(DynamicArray<Edge> shortestPath) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shortest path:\n");
+        for (int i = 0; i < shortestPath.size(); i++) {
+            Edge edge = shortestPath.get(i);
+            sb.append(edge.getPrevious().getName())
+              .append(" -> ")
+              .append(edge.getNext().getName())
+              .append(" : ")
+              .append(edge.getWeight())
+              .append("\n");
+        }
+        return sb.toString();
+    }
      }
