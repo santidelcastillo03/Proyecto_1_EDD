@@ -31,9 +31,9 @@ public class AntColonyOptimization {
         graph.addEdge("New york", "Los Angeles", 2451);
         graph.addEdge("Los Angeles", "Chicago", 2014);
         graph.addEdge("Chicago", "New york", 790);
-        
-        simulation.run();
 
+        simulation.run();
+        
 
         DynamicArray<Edge> shortestPath = simulation.run();
         String shortestPathString = Simulation.printShortestPath(shortestPath);
