@@ -57,30 +57,40 @@ public class Ant {
     }
     
     
-    public DynamicArray performCycle() {
-            while (currentCity != finalCity) {
+    public DynamicArray performCycle(Grafo grafo) {
+        City currentCity = grafo.getStartCity();
+        City finalCity = grafo.getFinalCity();
+            while (currentCity.getName() != finalCity.getName()) {
                 Edge path = decideNextCity(currentCity);
                 pathsTraveled.add(path);
-                distanceTraveled += path.getWeight();
+                this.distanceTraveled += path.getWeight();
                 double pher = path.getPheromones();
-                path.setPheromones(pher + (Simulation.getQ()/distanceTraveled));
+                double b = Simulation.getQ()/distanceTraveled;
+                path.setPheromones(pher + (b));
                 distanceTraveled += path.getWeight();
-                currentCity = path.getNext(); //decideNextCity es el metodo de probabilidad de la hormiga
+                currentCity = path.getNext();
+
             }
-           currentCity = Grafo.getStartCity();
+           currentCity = grafo.getStartCity();
+           
         return pathsTraveled;
     }
 
     
     public Edge decideNextCity(City currentCity){
-        DynamicArray probArray = new DynamicArray();
-        DynamicArray adjNodes = new DynamicArray();
+        DynamicArray<Edge> probArray = new DynamicArray();
+        DynamicArray<Edge> adjNodes = new DynamicArray();
         int len = Grafo.getEdges().size();
         for(int i = 0; i < len; i++){
-            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){
+            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){       
                 adjNodes.add(Grafo.getEdges().get(i));
+                
             }
         }
+        if (adjNodes.size() == 1){
+            return adjNodes.get(0);
+            
+        }else{
         double total = 0;
         for(int i = 0; i < adjNodes.size(); i++){
             Edge sEdge = (Edge) adjNodes.get(i);
@@ -112,12 +122,14 @@ public class Ant {
             
         
     }
+    }
     
     public static void updatePheromones() {
     double rho = Simulation.getRho();
-    for (int i = 0; i < Grafo.getEdges().size(); i++){
+    for (int i = 0; i < Grafo.getEdges().size(); i++){    
        double pher = Grafo.getEdges().get(i).getPheromones();
        Grafo.getEdges().get(i).setPheromones(pher*(1-rho));
+        
     }
 
     }

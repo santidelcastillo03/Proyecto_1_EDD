@@ -22,20 +22,22 @@ public class AntColonyOptimization {
         graph = new Grafo<>();
         GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 50);
+        Simulation simulation = new Simulation(1.0, 2.0, 2, (int) 0.5, 3);
         
         graph.addCity("New york");
         graph.addCity("Los Angeles");
         graph.addCity("Chicago");
+        graph.addCity("Miami");
 
         graph.addEdge("New york", "Los Angeles", 2451);
         graph.addEdge("Los Angeles", "Chicago", 2014);
-        graph.addEdge("Chicago", "New york", 790);
-        
-        simulation.run();
+        graph.addEdge("New york", "Chicago", 790);
+        graph.addEdge("Miami", "Chicago", 550);
 
+        graph.setStartCity("New york");
+        graph.setFinalCity("Chicago");
 
-        DynamicArray<Edge> shortestPath = simulation.run();
+        DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
 
