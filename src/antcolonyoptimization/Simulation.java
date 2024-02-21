@@ -18,14 +18,14 @@ public class Simulation {
     private static int cycles;
     private static Grafo<City> graph;
     
-    public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
+    public Simulation(double alpha, double beta, int cycles, int rho, int numAnts, double q) {
         this.alpha = alpha;
         this.beta = beta;
         this.numAnts = numAnts;
         this.rho = rho;
         this.cycles = cycles;
         this.ants = new DynamicArray<>();
-        this.q = 1;
+        this.q = q;
     }
     public static double getQ() {
         return q;
