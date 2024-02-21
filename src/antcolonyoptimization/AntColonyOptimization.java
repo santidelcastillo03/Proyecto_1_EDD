@@ -22,7 +22,7 @@ public class AntColonyOptimization {
         graph = new Grafo<>();
         GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 2, (int) 0.5, 3);
+        Simulation simulation = new Simulation(1.0, 2.0, 2, (int) 0.5, 3, 1);
         
         graph.addCity("New york");
         graph.addCity("Los Angeles");
