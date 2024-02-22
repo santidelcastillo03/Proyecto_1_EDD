@@ -191,12 +191,14 @@ public class NewSim extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "All fields must be numbers");
         }
         
-        DynamicArray<Edge> shortestPath = simulation.run(graph);
+        //DynamicArray<Edge> shortestPath = simulation.run(graph);
+        //String shortestPathString = Simulation.printShortestPath(shortestPath);
+         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
-        visualizer.displayShortestPath(shortestPath);
-        visualizer.visualize(graph);
         System.out.println(shortestPathString);
-
+        visualizer.displayShortestPath(shortestPath);
+        System.out.println(shortestPathString);
+     
     }//GEN-LAST:event_StartSimBuActionPerformed
 
     private void SaveGraphBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphBuActionPerformed

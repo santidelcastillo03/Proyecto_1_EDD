@@ -159,9 +159,8 @@ public class LoadSim extends javax.swing.JFrame {
 
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
-        visualizer.displayShortestPath(shortestPath);
-        visualizer.visualize(graph);
         System.out.println(shortestPathString);
+        visualizer.visualize(graph, shortestPath);
     }//GEN-LAST:event_StartSimBuActionPerformed
 
     private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed

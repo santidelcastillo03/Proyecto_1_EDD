@@ -16,10 +16,10 @@ public class GraphVisualizer {
     
     public GraphVisualizer() {
         gsGraph = new SingleGraph("Ant Colony Optimization");
-       gsGraph.setAttribute("ui.stylesheet", "edge.shortest {fill-color: red;}");
+
     }
     
-    public void visualize(Grafo<City> graph) {
+    public void visualize(Grafo<City> graph, DynamicArray<Edge> shortestPath) {
         System.setProperty("org.graphstream.ui", "swing");
         Graph gsGraph = new SingleGraph("Ant Colony Optimization");
 
@@ -36,6 +36,8 @@ public class GraphVisualizer {
         }
 
         gsGraph.display();
+
+        displayShortestPath(shortestPath);
     }
 
     public void displayShortestPath(DynamicArray<Edge> shortestPath) {
@@ -43,7 +45,7 @@ public class GraphVisualizer {
             String edgeId = edge.getPrevious().getName() + "-" + edge.getNext().getName();
             org.graphstream.graph.Edge gsEdge = gsGraph.getEdge(edgeId);
             if (gsEdge != null) {
-                gsEdge.setAttribute("ui.class", "shortest");
+                gsEdge.setAttribute("ui.class", "fill-color: red; stroke width: 5px");
             }
         }
     }
