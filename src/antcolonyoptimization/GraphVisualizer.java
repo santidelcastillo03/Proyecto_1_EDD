@@ -24,12 +24,15 @@ public class GraphVisualizer {
         Graph gsGraph = new SingleGraph("Ant Colony Optimization");
 
         for (City city : graph.getCities()) {
-            gsGraph.addNode(city.getName());
+            Node node = gsGraph.addNode(city.getName());
+            node.setAttribute("ui.label", city.getName());
+            node.setAttribute("ui.style", "fill-color: blue;");
         }
 
         for (Edge edge : graph.getEdges()) {
             String edgeId = edge.getPrevious().getName() + "-" + edge.getNext().getName();
-            gsGraph.addEdge(edgeId, edge.getPrevious().getName(), edge.getNext().getName());
+           org.graphstream.graph.Edge gsEdge = gsGraph.addEdge(edgeId, edge.getPrevious().getName(), edge.getNext().getName());
+            gsEdge.setAttribute("ui.label", String.valueOf(edge.getWeight()));
         }
 
         gsGraph.display();
