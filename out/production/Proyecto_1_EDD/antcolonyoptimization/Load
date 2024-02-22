@@ -1,0 +1,63 @@
+ciudad
+1
+2
+3
+4
+5
+6
+7
+aristas
+1,2,5
+1,3,3.1
+1,6,5.2
+6,3,3.2
+6,5,4.7
+3,2,4.9
+2,7,5.2
+3,7,3
+3,5,6
+7,4,4.8
+5,4,5.5
+
+
+graph = new Grafo<>();
+        GraphVisualizer visualizer = new GraphVisualizer();
+        GraphLoader graphLoader = new GraphLoader(graph);
+        graphLoader.loadFromFile();
+              
+        Simulation simulation = new Simulation(1.0, 2.0, 2, (int) 0.5, 3, 1);
+        
+        graph.addCity("New york");
+        graph.addCity("Los Angeles");
+        graph.addCity("Chicago");
+        graph.addCity("Miami");
+
+        graph.addEdge("New york", "Los Angeles", 2451);
+        graph.addEdge("Los Angeles", "Chicago", 2014);
+        graph.addEdge("New york", "Chicago", 790);
+        graph.addEdge("Miami", "Chicago", 550);
+
+        graph.setStartCity("New york");
+        graph.setFinalCity("Chicago");
+
+        DynamicArray<Edge> shortestPath = simulation.run(graph);
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
+        System.out.println(shortestPathString);
+
+              
+
+        visualizer.displayShortestPath(shortestPath);
+        visualizer.visualize(graph);
+
+public void displayShortestPath(DynamicArray<Edge> shortestPath) {
+        System.out.println("Shortest path:");
+        for (int i = 0; i < shortestPath.size(); i++) {
+            Edge edge = shortestPath.get(i);
+            System.out.println(edge.getPrevious().getName() + " -> " + edge.getNext().getName() + " : " + edge.getWeight());
+
+            org.graphstream.graph.Edge graphEdge = gsGraph.getEdge(edge.getPrevious().getName() + edge.getNext().getName());
+            if (graphEdge != null) {
+                graphEdge.setAttribute("ui.class", "shortest");
+            }
+        }
+    }

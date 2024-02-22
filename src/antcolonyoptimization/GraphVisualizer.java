@@ -34,16 +34,13 @@ public class GraphVisualizer {
 
         gsGraph.display();
     }
-    
-    public void displayShortestPath(DynamicArray<Edge> shortestPath) {
-        System.out.println("Shortest path:");
-        for (int i = 0; i < shortestPath.size(); i++) {
-            Edge edge = shortestPath.get(i);
-            System.out.println(edge.getPrevious().getName() + " -> " + edge.getNext().getName() + " : " + edge.getWeight());
 
-            org.graphstream.graph.Edge graphEdge = gsGraph.getEdge(edge.getPrevious().getName() + edge.getNext().getName());
-            if (graphEdge != null) {
-                graphEdge.setAttribute("ui.class", "shortest");
+    public void displayShortestPath(DynamicArray<Edge> shortestPath) {
+        for (Edge edge : shortestPath) {
+            String edgeId = edge.getPrevious().getName() + "-" + edge.getNext().getName();
+            org.graphstream.graph.Edge gsEdge = gsGraph.getEdge(edgeId);
+            if (gsEdge != null) {
+                gsEdge.setAttribute("ui.class", "shortest");
             }
         }
     }
