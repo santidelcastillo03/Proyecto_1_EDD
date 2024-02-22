@@ -13,6 +13,7 @@ import antcolonyoptimization.GraphLoader;
  */
 public class MainPage extends javax.swing.JFrame {
     NewSim newSim = new NewSim();
+    LoadSim loadSim = new LoadSim();
 
     /**
      * Creates new form MainPage
@@ -76,9 +77,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
-        Grafo graph = new Grafo();
-        GraphLoader graphLoader = new GraphLoader(graph);
-        graphLoader.loadFromFile();
+        loadSim.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -4,12 +4,25 @@
  */
 package antcolonyoptimization.UI;
 
+
+import antcolonyoptimization.DynamicArray;
+import antcolonyoptimization.Edge;
+import antcolonyoptimization.Grafo;
+import antcolonyoptimization.GraphLoader;
+import antcolonyoptimization.GraphVisualizer;
+import antcolonyoptimization.Simulation;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Santiago
  */
 public class LoadSim extends javax.swing.JFrame {
-
+    Simulation simulation;
+    Grafo graph = new Grafo();
+    GraphVisualizer visualizer = new GraphVisualizer();
+    GraphLoader graphLoader = new GraphLoader(graph);
+    
     /**
      * Creates new form LoadSim
      */
@@ -27,6 +40,22 @@ public class LoadSim extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        CyclesInput = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        AAInput = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        AlphaInput = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        BetaInput = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        RhoInput = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        QInput = new javax.swing.JTextField();
+        loadGraphBu = new javax.swing.JButton();
+        StartSimBu = new javax.swing.JButton();
+        BackBu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -34,8 +63,114 @@ public class LoadSim extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jLabel1.setText("Load Simulation");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+
+        jLabel2.setText("Cycles:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        getContentPane().add(CyclesInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, -1));
+
+        jLabel3.setText("Ant amount:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+
+        AAInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AAInputActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AAInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 80, -1));
+
+        jLabel4.setText("Alpha value:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+
+        AlphaInput.setText("1.0");
+        getContentPane().add(AlphaInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 80, -1));
+
+        jLabel5.setText("Beta value:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+
+        BetaInput.setText("2.0");
+        getContentPane().add(BetaInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 80, -1));
+
+        jLabel8.setText("Rho value:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+
+        RhoInput.setText("0.5");
+        getContentPane().add(RhoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 80, -1));
+
+        jLabel6.setText("Q value:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
+
+        QInput.setText("1.0");
+        getContentPane().add(QInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 80, -1));
+
+        loadGraphBu.setText("Load graph");
+        loadGraphBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadGraphBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loadGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, -1));
+
+        StartSimBu.setText("Start Simulation");
+        StartSimBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartSimBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(StartSimBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, -1, -1));
+
+        BackBu.setText("<< Back");
+        BackBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BackBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AAInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AAInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AAInputActionPerformed
+
+    private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
+        try {
+            int cycles = Integer.parseInt(CyclesInput.getText());
+            int antAmount = Integer.parseInt(AAInput.getText());
+            double alpha = Double.parseDouble(AlphaInput.getText());
+            double beta = Double.parseDouble(BetaInput.getText());
+            double rho = Double.parseDouble(RhoInput.getText());
+            double qValue = Double.parseDouble(QInput.getText());
+
+            Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount, qValue);
+            simulation.setCycles(cycles);
+            simulation.setNumAnts(antAmount);
+            simulation.setQ(qValue);
+            simulation.setAlpha(alpha);
+            simulation.setBeta(beta);
+            simulation.setRho(rho);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "All fields must be numbers");
+        }
+
+        DynamicArray<Edge> shortestPath = simulation.run(graph);
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
+        visualizer.displayShortestPath(shortestPath);
+        visualizer.visualize(graph);
+        System.out.println(shortestPathString);
+    }//GEN-LAST:event_StartSimBuActionPerformed
+
+    private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed
+
+    }//GEN-LAST:event_BackBuActionPerformed
+
+    private void loadGraphBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGraphBuActionPerformed
+        graphLoader.loadFromFile();
+    }//GEN-LAST:event_loadGraphBuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,6 +208,22 @@ public class LoadSim extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AAInput;
+    private javax.swing.JTextField AlphaInput;
+    private javax.swing.JButton BackBu;
+    private javax.swing.JTextField BetaInput;
+    private javax.swing.JTextField CyclesInput;
+    private javax.swing.JTextField QInput;
+    private javax.swing.JTextField RhoInput;
+    private javax.swing.JButton StartSimBu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loadGraphBu;
     // End of variables declaration//GEN-END:variables
 }

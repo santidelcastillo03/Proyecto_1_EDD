@@ -193,7 +193,6 @@ public class NewSim extends javax.swing.JFrame {
         
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
-        System.out.println(simulation.getCycles());
         visualizer.displayShortestPath(shortestPath);
         visualizer.visualize(graph);
         System.out.println(shortestPathString);
