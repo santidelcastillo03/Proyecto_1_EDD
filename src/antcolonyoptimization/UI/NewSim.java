@@ -157,8 +157,17 @@ public class NewSim extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AAInputActionPerformed
 
-    private void AddValuesBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddValuesBuActionPerformed
-        try {
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        addCity.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed
+        
+    }//GEN-LAST:event_BackBuActionPerformed
+
+    private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
+         try {
             int cycles = Integer.parseInt(CyclesInput.getText());
             int antAmount = Integer.parseInt(AAInput.getText());
             double alpha = Double.parseDouble(AlphaInput.getText());
@@ -173,32 +182,45 @@ public class NewSim extends javax.swing.JFrame {
         simulation.setAlpha(alpha);
         simulation.setBeta(beta);
         simulation.setRho(rho);
-
+        
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "All fields must be numbers");
         }
-
-    }//GEN-LAST:event_AddValuesBuActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        addCity.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed
         
-    }//GEN-LAST:event_BackBuActionPerformed
-
-    private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
+        System.out.println(simulation.getCycles());
         visualizer.displayShortestPath(shortestPath);
         visualizer.visualize(graph);
+        System.out.println(shortestPathString);
+
     }//GEN-LAST:event_StartSimBuActionPerformed
 
     private void SaveGraphBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphBuActionPerformed
         graphLoader.saveToFile();
     }//GEN-LAST:event_SaveGraphBuActionPerformed
+
+    private void AddValuesBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddValuesBuActionPerformed
+        try {
+            int cycles = Integer.parseInt(CyclesInput.getText());
+            int antAmount = Integer.parseInt(AAInput.getText());
+            double alpha = Double.parseDouble(AlphaInput.getText());
+            double beta = Double.parseDouble(BetaInput.getText());
+            double rho = Double.parseDouble(RhoInput.getText());
+            double qValue = Double.parseDouble(QInput.getText());
+
+            Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount, qValue);
+            simulation.setCycles(cycles);
+            simulation.setNumAnts(antAmount);
+            simulation.setQ(qValue);
+            simulation.setAlpha(alpha);
+            simulation.setBeta(beta);
+            simulation.setRho(rho);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "All fields must be numbers");
+        }
+    }//GEN-LAST:event_AddValuesBuActionPerformed
 
     /**
      * @param args the command line arguments
