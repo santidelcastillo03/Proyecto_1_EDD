@@ -61,6 +61,7 @@ public class NewSim extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         QInput = new javax.swing.JTextField();
         SaveGraphBu = new javax.swing.JButton();
+        DelCityBu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,6 +150,9 @@ public class NewSim extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SaveGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 560, -1, -1));
+
+        DelCityBu.setText("Delete city");
+        getContentPane().add(DelCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -265,6 +269,7 @@ public class NewSim extends javax.swing.JFrame {
     private javax.swing.JButton BackBu;
     private javax.swing.JTextField BetaInput;
     private javax.swing.JTextField CyclesInput;
+    private javax.swing.JButton DelCityBu;
     private javax.swing.JTextField QInput;
     private javax.swing.JTextField RhoInput;
     private javax.swing.JButton SaveGraphBu;
