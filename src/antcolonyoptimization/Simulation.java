@@ -4,6 +4,12 @@
  */
 package antcolonyoptimization;
 
+import antcolonyoptimization.Ant;
+import antcolonyoptimization.City;
+import antcolonyoptimization.DynamicArray;
+import antcolonyoptimization.Edge;
+import antcolonyoptimization.Grafo;
+
 /**
  *
  * @author Santiago
@@ -24,7 +30,7 @@ public class Simulation {
         this.numAnts = numAnts;
         this.rho = rho;
         this.cycles = cycles;
-        this.ants = new DynamicArray<>();
+        this.ants = new DynamicArray<Ant>();
         this.q = q;
     }
     public static double getQ() {
@@ -105,30 +111,49 @@ public class Simulation {
             shortestPath.add(adjNodes.get(0));
             currentCity = adjNodes.get(0).getNext();
         } else {
-            double maxPheromones = adjNodes.get(0).getPheromones();
-            Edge maxPheromonesEdge = adjNodes.get(0);
-            for (int a = 1; a < adjNodes.size(); a++) {
-                if (maxPheromones < adjNodes.get(a).getPheromones()) {
-                    maxPheromones = adjNodes.get(a).getPheromones();
-                    maxPheromonesEdge = adjNodes.get(a);
+            double total = 0;
+            for (Edge edge : adjNodes) {
+                total += Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta);
+            }
+
+            double randomValue = Math.random();
+            double probSum = 0;
+            Edge selectedEdge = null;
+            for (Edge edge : adjNodes) {
+                double edgeProb = Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta) / total;
+                probSum += edgeProb;
+                if (randomValue <= probSum) {
+                    selectedEdge = edge;
+                    break;
                 }
             }
-            shortestPath.add(maxPheromonesEdge);
-            currentCity = maxPheromonesEdge.getNext();
+
+            if (selectedEdge == null) {
+                double maxPheromones = adjNodes.get(0).getPheromones();
+                selectedEdge = adjNodes.get(0);
+                for (int i = 1; i < adjNodes.size(); i++) {
+                    if (adjNodes.get(i).getPheromones() > maxPheromones) {
+                        maxPheromones = adjNodes.get(i).getPheromones();
+                        selectedEdge = adjNodes.get(i);
+                    }
+                }
+            }
+
+            shortestPath.add(selectedEdge);
+            currentCity = selectedEdge.getNext();
         }
     }
     return shortestPath;
 }
 
+
     
     
       public static DynamicArray run(Grafo grafo) {
-          DynamicArray<Ant> colony = Ant.createColony(numAnts);
+          DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
           for (int a = 0; a < cycles; a++){
-              for (int i = 0; i < colony.size(); i++){
-              colony.get(i).performCycle(grafo);
-          } Ant.updatePheromones();
-      }
+              Ant.performCycle(grafo, grafo.getFinalCity());
+          }
             DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
