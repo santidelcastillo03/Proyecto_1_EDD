@@ -4,6 +4,9 @@
  */
 package antcolonyoptimization.UI;
 
+import antcolonyoptimization.Grafo;
+import antcolonyoptimization.GraphLoader;
+
 /**
  *
  * @author santiagodelcastillo
@@ -72,8 +75,10 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
+        Grafo graph = new Grafo();
+        GraphLoader graphLoader = new GraphLoader(graph);
+        graphLoader.loadFromFile();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
