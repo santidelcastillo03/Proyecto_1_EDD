@@ -4,6 +4,11 @@
  */
 package antcolonyoptimization.UI;
 
+import antcolonyoptimization.DynamicArray;
+import antcolonyoptimization.Edge;
+import antcolonyoptimization.Grafo;
+import antcolonyoptimization.GraphLoader;
+import antcolonyoptimization.GraphVisualizer;
 import antcolonyoptimization.Simulation;
 import javax.swing.JOptionPane;
 
@@ -13,6 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class NewSim extends javax.swing.JFrame {
     AddCity addCity = new AddCity();
+    Simulation simulation;
+    Grafo graph = new Grafo();
+    GraphVisualizer visualizer = new GraphVisualizer();
+    GraphLoader graphLoader = new GraphLoader(graph);
+
     
     
     /**
@@ -50,6 +60,7 @@ public class NewSim extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         QInput = new javax.swing.JTextField();
+        SaveGraphBu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,6 +69,11 @@ public class NewSim extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, -1, -1));
 
         StartSimBu.setText("Start Simulation");
+        StartSimBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartSimBuActionPerformed(evt);
+            }
+        });
         getContentPane().add(StartSimBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 560, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -126,6 +142,14 @@ public class NewSim extends javax.swing.JFrame {
         QInput.setText("1.0");
         getContentPane().add(QInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 80, -1));
 
+        SaveGraphBu.setText("Save Graph");
+        SaveGraphBu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveGraphBuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(SaveGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 560, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,24 +159,25 @@ public class NewSim extends javax.swing.JFrame {
 
     private void AddValuesBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddValuesBuActionPerformed
         try {
-        int cycles = Integer.parseInt(CyclesInput.getText());
-        int antAmount = Integer.parseInt(AAInput.getText());
-        double alpha = Double.parseDouble(AlphaInput.getText());
-        double beta = Double.parseDouble(BetaInput.getText());
-        double rho = Double.parseDouble(RhoInput.getText());
-        double qValue = Double.parseDouble(QInput.getText());
+            int cycles = Integer.parseInt(CyclesInput.getText());
+            int antAmount = Integer.parseInt(AAInput.getText());
+            double alpha = Double.parseDouble(AlphaInput.getText());
+            double beta = Double.parseDouble(BetaInput.getText());
+            double rho = Double.parseDouble(RhoInput.getText());
+            double qValue = Double.parseDouble(QInput.getText());
 
-        Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount);
+        Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount, qValue);
         simulation.setCycles(cycles);
         simulation.setNumAnts(antAmount);
         simulation.setQ(qValue);
         simulation.setAlpha(alpha);
         simulation.setBeta(beta);
         simulation.setRho(rho);
-        
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "All fields must be numbers");
         }
+
     }//GEN-LAST:event_AddValuesBuActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -163,6 +188,17 @@ public class NewSim extends javax.swing.JFrame {
     private void BackBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBuActionPerformed
         
     }//GEN-LAST:event_BackBuActionPerformed
+
+    private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
+        DynamicArray<Edge> shortestPath = simulation.run(graph);
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
+        visualizer.displayShortestPath(shortestPath);
+        visualizer.visualize(graph);
+    }//GEN-LAST:event_StartSimBuActionPerformed
+
+    private void SaveGraphBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphBuActionPerformed
+        graphLoader.saveToFile();
+    }//GEN-LAST:event_SaveGraphBuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +245,7 @@ public class NewSim extends javax.swing.JFrame {
     private javax.swing.JTextField CyclesInput;
     private javax.swing.JTextField QInput;
     private javax.swing.JTextField RhoInput;
+    private javax.swing.JButton SaveGraphBu;
     private javax.swing.JButton StartSimBu;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
