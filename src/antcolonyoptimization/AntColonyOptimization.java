@@ -21,8 +21,9 @@ public class AntColonyOptimization {
         ui.setVisible(true);
         
         graph = new Grafo();
+        GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 200, (int) 0.5, 10, 1);
+        //Simulation simulation = new Simulation(1.0, 2.0, 200, (int) 0.5, 10, 1);
         
         /*
         graph.addCity("New york");
@@ -45,8 +46,9 @@ public class AntColonyOptimization {
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
+        visualizer.visualize(graph, shortestPath);
+        visualizer.displayShortestPath(shortestPath);
         */
-        
        
     }
 
