@@ -139,9 +139,9 @@ public class Ant {
                 
             }
         }
-       
-           
         
+           
+       
         if (adjNodes.size() == 1){
             return adjNodes.get(0);
             
@@ -175,7 +175,7 @@ public class Ant {
         if (total == 0 || bool == false){
         Edge e = adjNodes.get(0);
         for(int g = 1; g < adjNodes.size(); g++){
-            if(e.getWeight() < adjNodes.get(g).getWeight()){
+            if(e.getWeight() > adjNodes.get(g).getWeight()){
                 e = adjNodes.get(g);
             }
             return e;
