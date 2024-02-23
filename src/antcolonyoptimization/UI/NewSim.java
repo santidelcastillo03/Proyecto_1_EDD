@@ -176,8 +176,8 @@ public class NewSim extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
-         if (graph.getCities().size() < 4) {
-        JOptionPane.showMessageDialog(null, "There must be at least 4 cities to start the simulation.");
+         if (graph.getCities().size() < 4 || graph.getCities().size() > 20) {
+        JOptionPane.showMessageDialog(null, "There must be at least 4 cities and less than 20 to start the simulation.");
         return;
          }
         

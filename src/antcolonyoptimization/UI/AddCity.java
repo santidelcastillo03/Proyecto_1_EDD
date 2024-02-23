@@ -167,6 +167,7 @@ public class AddCity extends javax.swing.JFrame {
             graph.setStartCity(this.cityNameInput.getText());
         } else {
             JOptionPane.showMessageDialog(null, "Start city already exists");
+            return;
         }
     } else if (this.combo.getSelectedItem() == "Destination city") {
         graph.addCity(this.cityNameInput.getText());
@@ -174,12 +175,14 @@ public class AddCity extends javax.swing.JFrame {
             graph.setFinalCity(this.cityNameInput.getText());
         } else {
             JOptionPane.showMessageDialog(null, "Destination city already exists");
+            return;
         }
     } else {
         if (graph.cityExists(this.cityNameInput.getText()) == false) {
             graph.addCity(this.cityNameInput.getText());
         } else {
             JOptionPane.showMessageDialog(null, "This city already exists");
+            return;
         }
     }
     cityNameInput.setText("");

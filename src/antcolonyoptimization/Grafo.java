@@ -26,9 +26,9 @@ public class Grafo<T> {
     
 
     public void addCity(String data) {
-        if (cities.size() >= 20) {
-            JOptionPane.showMessageDialog(null,"you can't add more cities");
-        }
+        //if (cities.size() >= 20) {
+          //  JOptionPane.showMessageDialog(null,"you can't add more cities");
+        //}
         cities.add(new City(data));
     }
 

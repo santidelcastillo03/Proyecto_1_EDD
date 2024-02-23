@@ -94,6 +94,7 @@ public class DeleteCity extends javax.swing.JFrame {
             return;
         }
         graph.removeCity(DelCityInput.getText());
+        DelCityInput.setText("");
     }//GEN-LAST:event_DelCityBuActionPerformed
 
     /**
