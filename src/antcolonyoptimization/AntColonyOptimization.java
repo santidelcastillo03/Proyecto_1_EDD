@@ -22,21 +22,39 @@ public class AntColonyOptimization {
         
         graph = new Grafo();
         
+<<<<<<< Updated upstream
         Simulation simulation = new Simulation(1.0, 2.0, 200, (int) 0.5, 10, 1);
         
         graph.addCity("New york");
         graph.addCity("Los Angeles");
         graph.addCity("Chicago");
         graph.addCity("Dallas");
-
-
-        graph.addEdge("New york", "Los Angeles", 100);
-        graph.addEdge("Los Angeles", "Chicago", 100);
-        graph.addEdge("Chicago", "Dallas", 100);
-        graph.addEdge("New york", "Dallas", 50);
+=======
+        Simulation simulation = new Simulation(1.0, 2.0, 40, (int) 0.5, 5, 1);
         
-        graph.setFinalCity("Dallas");
-        graph.setStartCity("New york");
+        
+        graph.addCity("1");
+        graph.addCity("2");
+        graph.addCity("3");
+        graph.addCity("4");
+        graph.addCity("5");
+        graph.addCity("6");
+        graph.addCity("7");
+        graph.addCity("8");
+>>>>>>> Stashed changes
+
+
+        graph.addEdge("1","2",10.0);
+        graph.addEdge("2", "3", 12.0);
+        graph.addEdge("3", "4", 16.0);
+        graph.addEdge("2", "5", 4.0);
+        graph.addEdge("4", "6", 20.0);
+        graph.addEdge("3", "7", 10.0);
+        graph.addEdge("6", "8", 1.0);
+        graph.addEdge("4", "8", 15.0);
+        
+        graph.setFinalCity("6");
+        graph.setStartCity("1");
         
 
 
@@ -44,8 +62,15 @@ public class AntColonyOptimization {
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
+<<<<<<< Updated upstream
         
          
+=======
+        /*visualizer.visualize(graph, shortestPath);
+        visualizer.displayShortestPath(shortestPath);*/
+        
+       
+>>>>>>> Stashed changes
     }
 
     

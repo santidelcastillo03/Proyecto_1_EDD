@@ -100,7 +100,7 @@ public class Simulation {
     public static DynamicArray<Edge> shortestPath(Grafo grafo) {
     DynamicArray<Edge> shortestPath = new DynamicArray<>();
     City currentCity = grafo.getStartCity();
-    while (!currentCity.getName().equals(grafo.getFinalCity().getName())) {
+    while (!currentCity.equals(grafo.getFinalCity())) {
         DynamicArray<Edge> adjNodes = new DynamicArray<>();
         for (Edge edge : grafo.getEdges()) {
             if (edge.getPrevious().equals(currentCity)) {
@@ -111,6 +111,7 @@ public class Simulation {
             shortestPath.add(adjNodes.get(0));
             currentCity = adjNodes.get(0).getNext();
         } else {
+<<<<<<< Updated upstream
             double total = 0;
             for (Edge edge : adjNodes) {
                 total += Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta);
@@ -136,6 +137,14 @@ public class Simulation {
                         maxPheromones = adjNodes.get(i).getPheromones();
                         selectedEdge = adjNodes.get(i);
                     }
+=======
+            double pher = adjNodes.get(0).getPheromones();
+            Edge selectedEdge = adjNodes.get(0);
+            for(int i= 1; i < adjNodes.size(); i++){
+                if(pher < adjNodes.get(i).getPheromones()){
+                    pher = adjNodes.get(i).getPheromones();
+                    selectedEdge = adjNodes.get(i);
+>>>>>>> Stashed changes
                 }
             }
 
@@ -151,9 +160,7 @@ public class Simulation {
     
       public static DynamicArray run(Grafo grafo) {
           DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
-          for (int a = 0; a < cycles; a++){
               Ant.performCycle(grafo, grafo.getFinalCity());
-          }
             DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
