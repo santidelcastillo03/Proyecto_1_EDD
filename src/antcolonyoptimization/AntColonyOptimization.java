@@ -24,6 +24,7 @@ public class AntColonyOptimization {
         
         Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 5, 1);
         
+        /*
         graph.addCity("New york");
         graph.addCity("Los Angeles");
         graph.addCity("Chicago");
@@ -46,6 +47,7 @@ public class AntColonyOptimization {
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
+        */
         
        
     }
