@@ -20,6 +20,7 @@ public class AntColonyOptimization {
         MainPage ui = new MainPage();
         ui.setVisible(true);
         
+        /*
         graph = new Grafo();
         
         Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 5, 1);
@@ -46,6 +47,7 @@ public class AntColonyOptimization {
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
+        */
         
          
     }
