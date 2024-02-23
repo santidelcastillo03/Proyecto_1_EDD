@@ -28,26 +28,31 @@ public class GraphLoader {
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            City startCity = null;
-            City finalCity = null;
+            
             try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
                 String line;
                 boolean isCity = true;
+                String lastCity = null;
                 while ((line = br.readLine()) != null) {
                     if (line.equals("ciudad")) {
                         continue;
                     }
                     if (line.equals("aristas")) {
                         isCity = false;
+                        if (lastCity != null) {
+                            graph.setFinalCity(lastCity);
+                        }
                         continue;
                     }
                     if (isCity) {
                         City city = new City(line);
                         graph.addCity(city.getName());
-                        if (startCity == null) {
-                            startCity = city;
+                        if (graph.getStartCity() == null) {
+                            graph.setStartCity(city.getName());
+                            
                         }
-                        finalCity = city;
+                        lastCity = city.getName();
+                                               
                     } else {
                         String[] edgeData = line.split(",");
                         String city1 = edgeData[0];
@@ -59,8 +64,6 @@ public class GraphLoader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Start City: " + startCity);
-            System.out.println("Final City: " + finalCity);
         }
     }
     public void saveToFile() {

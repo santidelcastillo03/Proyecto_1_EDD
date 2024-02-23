@@ -16,12 +16,13 @@ public class GraphVisualizer {
     
     public GraphVisualizer() {
         gsGraph = new SingleGraph("Ant Colony Optimization");
-       gsGraph.setAttribute("ui.stylesheet", "edge.shortest {fill-color: red;}");
+
     }
     
-    public void visualize(Grafo<City> graph) {
+    public void visualize(Grafo<City> graph, DynamicArray<Edge> shortestPath,Simulation simulation) {
         System.setProperty("org.graphstream.ui", "swing");
-        Graph gsGraph = new SingleGraph("Ant Colony Optimization");
+        gsGraph.setAttribute("ui.stylesheet", "graph { fill-color: white; } node { fill-color: black; text-alignment: under; text-size: 20; } edge { fill-color: grey; } edge .marked { fill-color: red; stroke-width: 5px;}");
+        String shortestPathString = Simulation.printShortestPath(shortestPath);
 
         for (City city : graph.getCities()) {
             Node node = gsGraph.addNode(city.getName());
@@ -36,16 +37,23 @@ public class GraphVisualizer {
         }
 
         gsGraph.display();
+        displayShortestPath(shortestPath);
+        gsGraph.setAttribute("ui.default.title","Cycles made: "+simulation.getCycles()+" \nAnt amount: "+simulation.getNumAnts()+""+shortestPathString);
     }
 
     public void displayShortestPath(DynamicArray<Edge> shortestPath) {
-        for (Edge edge : shortestPath) {
-            String edgeId = edge.getPrevious().getName() + "-" + edge.getNext().getName();
-            org.graphstream.graph.Edge gsEdge = gsGraph.getEdge(edgeId);
-            if (gsEdge != null) {
-                gsEdge.setAttribute("ui.class", "shortest");
-            }
+    for (Edge edge : shortestPath) {
+        String edgeId1 = edge.getPrevious().getName() + "-" + edge.getNext().getName();
+        String edgeId2 = edge.getNext().getName() + "-" + edge.getPrevious().getName();
+        org.graphstream.graph.Edge gsEdge = gsGraph.getEdge(edgeId1);
+        if (gsEdge == null) {
+            gsEdge = gsGraph.getEdge(edgeId2);
+        }
+        if (gsEdge != null) {
+            gsEdge.setAttribute("ui.class", "marked");
         }
     }
-
 }
+    }
+
+
