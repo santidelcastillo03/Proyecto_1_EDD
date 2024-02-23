@@ -111,40 +111,12 @@ public class Simulation {
             shortestPath.add(adjNodes.get(0));
             currentCity = adjNodes.get(0).getNext();
         } else {
-<<<<<<< Updated upstream
-            double total = 0;
-            for (Edge edge : adjNodes) {
-                total += Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta);
-            }
-
-            double randomValue = Math.random();
-            double probSum = 0;
-            Edge selectedEdge = null;
-            for (Edge edge : adjNodes) {
-                double edgeProb = Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta) / total;
-                probSum += edgeProb;
-                if (randomValue <= probSum) {
-                    selectedEdge = edge;
-                    break;
-                }
-            }
-
-            if (selectedEdge == null) {
-                double maxPheromones = adjNodes.get(0).getPheromones();
-                selectedEdge = adjNodes.get(0);
-                for (int i = 1; i < adjNodes.size(); i++) {
-                    if (adjNodes.get(i).getPheromones() > maxPheromones) {
-                        maxPheromones = adjNodes.get(i).getPheromones();
-                        selectedEdge = adjNodes.get(i);
-                    }
-=======
             double pher = adjNodes.get(0).getPheromones();
             Edge selectedEdge = adjNodes.get(0);
             for(int i= 1; i < adjNodes.size(); i++){
                 if(pher < adjNodes.get(i).getPheromones()){
                     pher = adjNodes.get(i).getPheromones();
                     selectedEdge = adjNodes.get(i);
->>>>>>> Stashed changes
                 }
             }
 
