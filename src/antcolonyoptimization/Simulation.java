@@ -127,7 +127,9 @@ public class Simulation {
                     break;
                 }
             }
-
+            if(adjNodes.size() == 0){
+            currentCity = grafo.getStartCity();
+        }
             if (selectedEdge == null) {
                 double maxPheromones = adjNodes.get(0).getPheromones();
                 selectedEdge = adjNodes.get(0);
@@ -160,7 +162,7 @@ public class Simulation {
       
       public static String printShortestPath(DynamicArray<Edge> shortestPath) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shortest path:\n");
+        sb.append("Shortest path: \n");
         for (int i = 0; i < shortestPath.size(); i++) {
             Edge edge = shortestPath.get(i);
             sb.append(edge.getPrevious().getName())
