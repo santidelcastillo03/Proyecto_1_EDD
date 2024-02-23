@@ -21,8 +21,7 @@ public class GraphVisualizer {
     
     public void visualize(Grafo<City> graph, DynamicArray<Edge> shortestPath,Simulation simulation) {
         System.setProperty("org.graphstream.ui", "swing");
-        Graph gsGraph = new SingleGraph("Ant Colony Optimization");
-        gsGraph.setAttribute("ui.stylesheet", "graph { fill-color: white; } node { fill-color: black; text-alignment: under; text-size: 20; } edge { fill-color: grey; } edge .marked { fill-color: red; }");
+        gsGraph.setAttribute("ui.stylesheet", "graph { fill-color: white; } node { fill-color: black; text-alignment: under; text-size: 20; } edge { fill-color: grey; } edge .marked { fill-color: red; stroke-width: 5px;}");
         String shortestPathString = Simulation.printShortestPath(shortestPath);
 
         for (City city : graph.getCities()) {
@@ -38,7 +37,6 @@ public class GraphVisualizer {
         }
 
         gsGraph.display();
-        gsGraph.setAttribute("ui.stylesheet", "graph { fill-color: white; } node { fill-color: black; text-alignment: under; text-size: 20; } edge { fill-color: grey; } edge.marked { fill-color: red; stroke-width: 5px; }");
         displayShortestPath(shortestPath);
         gsGraph.setAttribute("ui.default.title","Cycles made: "+simulation.getCycles()+" \nAnt amount: "+simulation.getNumAnts()+""+shortestPathString);
     }
@@ -52,7 +50,7 @@ public class GraphVisualizer {
             gsEdge = gsGraph.getEdge(edgeId2);
         }
         if (gsEdge != null) {
-            gsEdge.setAttribute("ui.style", "marked");
+            gsEdge.setAttribute("ui.class", "marked");
         }
     }
 }
