@@ -100,7 +100,7 @@ public class Simulation {
     public static DynamicArray<Edge> shortestPath(Grafo grafo) {
     DynamicArray<Edge> shortestPath = new DynamicArray<>();
     City currentCity = grafo.getStartCity();
-    while (!currentCity.getName().equals(grafo.getFinalCity().getName())) {
+    while (!currentCity.equals(grafo.getFinalCity())) {
         DynamicArray<Edge> adjNodes = new DynamicArray<>();
         for (Edge edge : grafo.getEdges()) {
             if (edge.getPrevious().equals(currentCity)) {
@@ -111,33 +111,12 @@ public class Simulation {
             shortestPath.add(adjNodes.get(0));
             currentCity = adjNodes.get(0).getNext();
         } else {
-            double total = 0;
-            for (Edge edge : adjNodes) {
-                total += Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta);
-            }
-
-            double randomValue = Math.random();
-            double probSum = 0;
-            Edge selectedEdge = null;
-            for (Edge edge : adjNodes) {
-                double edgeProb = Math.pow(edge.getPheromones(), alpha) * Math.pow(1.0 / edge.getWeight(), beta) / total;
-                probSum += edgeProb;
-                if (randomValue <= probSum) {
-                    selectedEdge = edge;
-                    break;
-                }
-            }
-            if(adjNodes.size() == 0){
-            currentCity = grafo.getStartCity();
-        }
-            if (selectedEdge == null) {
-                double maxPheromones = adjNodes.get(0).getPheromones();
-                selectedEdge = adjNodes.get(0);
-                for (int i = 1; i < adjNodes.size(); i++) {
-                    if (adjNodes.get(i).getPheromones() > maxPheromones) {
-                        maxPheromones = adjNodes.get(i).getPheromones();
-                        selectedEdge = adjNodes.get(i);
-                    }
+            double pher = adjNodes.get(0).getPheromones();
+            Edge selectedEdge = adjNodes.get(0);
+            for(int i= 1; i < adjNodes.size(); i++){
+                if(pher < adjNodes.get(i).getPheromones()){
+                    pher = adjNodes.get(i).getPheromones();
+                    selectedEdge = adjNodes.get(i);
                 }
             }
 
@@ -153,16 +132,14 @@ public class Simulation {
     
       public static DynamicArray run(Grafo grafo) {
           DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
-          for (int a = 0; a < cycles; a++){
               Ant.performCycle(grafo, grafo.getFinalCity());
-          }
             DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
       
       public static String printShortestPath(DynamicArray<Edge> shortestPath) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shortest path: \n");
+        sb.append("Shortest path:\n");
         for (int i = 0; i < shortestPath.size(); i++) {
             Edge edge = shortestPath.get(i);
             sb.append(edge.getPrevious().getName())
