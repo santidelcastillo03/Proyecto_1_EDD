@@ -22,24 +22,22 @@ public class AntColonyOptimization {
         
         graph = new Grafo();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 5, 1);
+        Simulation simulation = new Simulation(1.0, 2.0, 200, (int) 0.5, 10, 1);
         
         /*
         graph.addCity("New york");
         graph.addCity("Los Angeles");
         graph.addCity("Chicago");
         graph.addCity("Dallas");
-        graph.addCity("Miami");
-         
 
-        graph.addEdge("Miami", "New york", 300);
-        graph.addEdge("New york", "Chicago", 800);
-        graph.addEdge("Chicago", "Los Angeles", 5000);
-        graph.addEdge("Miami", "Dallas", 7000);
-        graph.addEdge("Dallas", "Chicago", 3500);
+
+        graph.addEdge("New york", "Los Angeles", 100);
+        graph.addEdge("Los Angeles", "Chicago", 100);
+        graph.addEdge("Chicago", "Dallas", 100);
+        graph.addEdge("New york", "Dallas", 50);
         
-        graph.setFinalCity("Los Angeles");
-        graph.setStartCity("Miami");
+        graph.setFinalCity("Dallas");
+        graph.setStartCity("New york");
         
 
 
