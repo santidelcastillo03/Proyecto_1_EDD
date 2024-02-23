@@ -152,7 +152,6 @@ public class Ant {
                 
             }
         }
-       
         if (adjNodes.size() == 1){
             return adjNodes.get(0);
             
