@@ -106,7 +106,11 @@ public class Ant {
                 this.pathsTraveled.add(path);
                 this.distanceTraveled += path.getWeight();
                 distanceTraveled += path.getWeight();
+                if(path.getNext().equals(currentCity)){
+                    currentCity = path.getPrevious();
+                }else{
                 currentCity = path.getNext();
+                }
                 updatePheromones(this.pathsTraveled, ant);
                 return currentCity;
                 
@@ -120,10 +124,11 @@ public class Ant {
        
        while(antsMoving.size() > 0){
            System.out.println("iteracion" +i);
+           System.out.println("hormigas moviendose " + antsMoving.size());
             DynamicArray<Edge> adjNodes = new DynamicArray();
             int a= 1;
             for(Ant ant : antsMoving){
-                System.out.println("hormiga" + a);
+                System.out.println(ant);
                 System.out.println("ciudad " + ant.getCurrentCity().getName());
             for (Edge edge : Grafo.getEdges()){
                 if(ant.getCurrentCity().equals(edge.getPrevious())){
@@ -131,6 +136,7 @@ public class Ant {
          }}
             if (ant.getCurrentCity().equals(grafo.getFinalCity())){
                 ant.setCurrentCity(grafo.getStartCity());
+                System.out.println("fuera");
                 antsMoving.removeN(ant);
             }else if(adjNodes.size() == 0){
                 updatePheromones(ant.getPathsTraveled(), ant);
@@ -138,8 +144,10 @@ public class Ant {
             }
                 else{
                 ant.setCurrentCity(ant.moveCity(grafo, ant.getCurrentCity(), ant.getFinalCity(), ant) );
+                System.out.println("->" + ant.getCurrentCity().getName());
             }a++;
     }i++;
+           
    }}
 
     
@@ -148,7 +156,7 @@ public class Ant {
         DynamicArray<Edge> adjNodes = new DynamicArray();
         int len = Grafo.getEdges().size();
         for(int i = 0; i < len; i++){
-            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){       
+            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity) || Grafo.getEdges().get(i).getNext().equals(currentCity)){       
                 adjNodes.add(Grafo.getEdges().get(i));
                 
             }
