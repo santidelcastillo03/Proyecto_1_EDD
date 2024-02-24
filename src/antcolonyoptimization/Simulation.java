@@ -100,16 +100,43 @@ public class Simulation {
     public static DynamicArray<Edge> shortestPath(Grafo grafo) {
     DynamicArray<Edge> shortestPath = new DynamicArray<>();
     City currentCity = grafo.getStartCity();
+    DynamicArray<Edge> allEdges= new DynamicArray();
+    for(Edge edge : grafo.getEdges() ){
+        allEdges.add(edge);
+    }
     while (!currentCity.equals(grafo.getFinalCity())) {
         DynamicArray<Edge> adjNodes = new DynamicArray<>();
-        for (Edge edge : grafo.getEdges()) {
+        System.out.println(currentCity.getName());
+        for (Edge edge : allEdges) {
             if (edge.getPrevious().equals(currentCity)) {
                 adjNodes.add(edge);
             }
-        }
-        if (adjNodes.size() == 1) {
-            shortestPath.add(adjNodes.get(0));
-            currentCity = adjNodes.get(0).getNext();
+        }if (adjNodes.size() == 0){
+            DynamicArray<Edge> invAdjNodes = new DynamicArray();
+            for (Edge edge : allEdges){
+                if(edge.getNext().equals(currentCity)){
+                    invAdjNodes.add(edge);
+                }
+                
+            }
+            double pher = invAdjNodes.get(0).getPheromones();
+            Edge invselectedEdge = invAdjNodes.get(0);
+            for(int i= 1; i < invAdjNodes.size(); i++){
+                if(pher < invAdjNodes.get(i).getPheromones()){
+                    pher = invAdjNodes.get(i).getPheromones();
+                    invselectedEdge = invAdjNodes.get(i);
+                }
+                
+                }
+                for (Edge edge : allEdges){
+                if(edge.getNext().equals(currentCity)){
+                    allEdges.removeN(edge);
+                }
+                }
+                currentCity = invselectedEdge.getPrevious();
+                shortestPath.removeN(invselectedEdge);
+                System.out.println("se regreso a " + currentCity.getName());
+                
         } else {
             double pher = adjNodes.get(0).getPheromones();
             Edge selectedEdge = adjNodes.get(0);
@@ -118,11 +145,13 @@ public class Simulation {
                     pher = adjNodes.get(i).getPheromones();
                     selectedEdge = adjNodes.get(i);
                 }
+            
             }
-
             shortestPath.add(selectedEdge);
             currentCity = selectedEdge.getNext();
+            System.out.println("fue a " + currentCity.getName());
         }
+        
     }
     return shortestPath;
 }
