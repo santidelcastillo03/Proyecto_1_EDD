@@ -24,7 +24,7 @@ public class Simulation {
     private static int cycles;
     private static Grafo<City> graph;
     
-    public Simulation(double alpha, double beta, int cycles, int rho, int numAnts, double q) {
+    public Simulation(double alpha, double beta, int cycles, double rho, int numAnts, double q) {
         this.alpha = alpha;
         this.beta = beta;
         this.numAnts = numAnts;

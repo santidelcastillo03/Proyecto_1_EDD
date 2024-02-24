@@ -20,11 +20,13 @@ public class AntColonyOptimization {
         MainPage ui = new MainPage();
         ui.setVisible(true);
         
+        
         graph = new Grafo();
-
+        GraphVisualizer visualizer = new GraphVisualizer();
+        
         Simulation simulation = new Simulation(1.0, 2.0, 40, (int) 0.5, 5, 1);
-        
-        
+
+
         graph.addCity("1");
         graph.addCity("2");
         graph.addCity("3");
@@ -43,23 +45,24 @@ public class AntColonyOptimization {
         graph.addEdge("3", "7", 10.0);
         graph.addEdge("6", "8", 1.0);
         graph.addEdge("4", "8", 15.0);
-        
+
         graph.setFinalCity("6");
         graph.setStartCity("1");
-        
+
 
 
 
         DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
-
+         
+        
         
          
 
-        /*visualizer.visualize(graph, shortestPath);
-        visualizer.displayShortestPath(shortestPath);*/
-
+        visualizer.visualize(graph, shortestPath,simulation);
+        visualizer.displayShortestPath(shortestPath);
+        
     }
 
     

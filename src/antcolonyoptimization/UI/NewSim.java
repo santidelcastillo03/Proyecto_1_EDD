@@ -65,6 +65,7 @@ public class NewSim extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -163,6 +164,9 @@ public class NewSim extends javax.swing.JFrame {
         jLabel10.setText("After finishing editing the graph you can save the graph, start the simulation, or both");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, -1, -1));
 
+        jLabel11.setText("(Min:  )");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,7 +193,7 @@ public class NewSim extends javax.swing.JFrame {
             double rho = Double.parseDouble(RhoInput.getText());
             double qValue = Double.parseDouble(QInput.getText());
 
-        Simulation simulation = new Simulation(alpha, beta, cycles, (int) rho, antAmount, qValue);
+        Simulation simulation = new Simulation(alpha, beta, cycles, rho, antAmount, qValue);
         
         
         
@@ -270,6 +274,7 @@ public class NewSim extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

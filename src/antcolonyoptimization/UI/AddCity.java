@@ -47,6 +47,7 @@ public class AddCity extends javax.swing.JFrame {
         connectCityBu = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         distanceInput = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,7 +80,7 @@ public class AddCity extends javax.swing.JFrame {
                 AddCityBuActionPerformed(evt);
             }
         });
-        getContentPane().add(AddCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
+        getContentPane().add(AddCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +109,9 @@ public class AddCity extends javax.swing.JFrame {
         jLabel4.setText("Distance:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
         getContentPane().add(distanceInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 100, -1));
+
+        jLabel7.setText("(Min: 4 Max: 20)");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,6 +242,7 @@ public class AddCity extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
