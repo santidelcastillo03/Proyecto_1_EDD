@@ -66,6 +66,8 @@ public class NewSim extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,11 +81,11 @@ public class NewSim extends javax.swing.JFrame {
                 StartSimBuActionPerformed(evt);
             }
         });
-        getContentPane().add(StartSimBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 560, -1, -1));
+        getContentPane().add(StartSimBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("New Simulation");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jLabel2.setText("Cycles:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
@@ -123,7 +125,7 @@ public class NewSim extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 110, -1));
 
         jLabel6.setText("Q value:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, -1, -1));
@@ -137,7 +139,7 @@ public class NewSim extends javax.swing.JFrame {
                 SaveGraphBuActionPerformed(evt);
             }
         });
-        getContentPane().add(SaveGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 560, -1, -1));
+        getContentPane().add(SaveGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, -1));
 
         DelCityBu.setText("Delete city");
         DelCityBu.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +147,7 @@ public class NewSim extends javax.swing.JFrame {
                 DelCityBuActionPerformed(evt);
             }
         });
-        getContentPane().add(DelCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, -1, -1));
+        getContentPane().add(DelCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 110, -1));
 
         loadGraphBu.setText("Load graph");
         loadGraphBu.addActionListener(new java.awt.event.ActionListener() {
@@ -153,19 +155,23 @@ public class NewSim extends javax.swing.JFrame {
                 loadGraphBuActionPerformed(evt);
             }
         });
-        getContentPane().add(loadGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 560, -1, -1));
+        getContentPane().add(loadGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, -1, -1));
 
         jLabel7.setText("Instructions:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
 
         jLabel9.setText("Before adding or deleting a city, load the graph (if you have one) ");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
 
         jLabel10.setText("After finishing editing the graph you can save the graph, start the simulation, or both");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
 
         jLabel11.setText("(Min:  )");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 10, 10));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Untitled design.jpg"))); // NOI18N
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 810, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,6 +282,8 @@ public class NewSim extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -37,6 +37,8 @@ public class MainPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,10 +57,15 @@ public class MainPage extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 220, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 220, 60));
 
         jLabel2.setText("Created by: Santiago del Castillo, Vicente Tralci, Angel Garcia");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 10, 10));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Diseno_sin_titulo_1.jpg"))); // NOI18N
+        jLabel4.setText(" ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,6 +115,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
