@@ -158,20 +158,20 @@ public class NewSim extends javax.swing.JFrame {
         getContentPane().add(loadGraphBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, -1, -1));
 
         jLabel7.setText("Instructions:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, -1, -1));
 
         jLabel9.setText("Before adding or deleting a city, load the graph (if you have one) ");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, -1, -1));
 
         jLabel10.setText("After finishing editing the graph you can save the graph, start the simulation, or both");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
         jLabel11.setText("(Min:  )");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 10, 10));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Untitled design.jpg"))); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 810, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,7 +191,11 @@ public class NewSim extends javax.swing.JFrame {
         return;
          }
         visualizer.clear();
-        try {
+            if (!graph.allCitiesHaveEdges()) {
+                JOptionPane.showMessageDialog(null, "All cities must have at least one edge.");
+                return;
+            }
+                try {
             int cycles = Integer.parseInt(CyclesInput.getText());
             int antAmount = Integer.parseInt(AAInput.getText());
             double alpha = Double.parseDouble(AlphaInput.getText());

@@ -176,4 +176,20 @@ public class Grafo<T> {
         }
         return false;
     }
+
+    public boolean allCitiesHaveEdges() {
+        for (City city : this.getCities()) {
+            boolean hasEdge = false;
+            for (City otherCity : this.getCities()) {
+                if (!city.equals(otherCity) && this.connectionExists(city.getName(), otherCity.getName())) {
+                    hasEdge = true;
+                    break;
+                }
+            }
+            if (!hasEdge) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -38,6 +38,8 @@ public class DeleteCity extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         DelCityBu = new javax.swing.JButton();
         DelCityInput = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,14 +53,14 @@ public class DeleteCity extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Delete City");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
         jLabel2.setText("City to delete:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
         DelCityBu.setText("Delete city");
         DelCityBu.addActionListener(new java.awt.event.ActionListener() {
@@ -66,8 +68,12 @@ public class DeleteCity extends javax.swing.JFrame {
                 DelCityBuActionPerformed(evt);
             }
         });
-        getContentPane().add(DelCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
-        getContentPane().add(DelCityInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 80, -1));
+        getContentPane().add(DelCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
+        getContentPane().add(DelCityInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 196, 80, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 10, 10));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete_city.jpg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,6 +144,8 @@ public class DeleteCity extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

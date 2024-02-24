@@ -48,6 +48,7 @@ public class AddCity extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         distanceInput = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -61,18 +62,18 @@ public class AddCity extends javax.swing.JFrame {
                 comboActionPerformed(evt);
             }
         });
-        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
+        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, 30));
 
         jLabel1.setText("City name:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        jLabel2.setText("City property");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-        getContentPane().add(cityNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 110, -1));
+        jLabel2.setText("City property:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        getContentPane().add(cityNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 110, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel5.setText("Add City");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         AddCityBu.setText("Add city");
         AddCityBu.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +81,7 @@ public class AddCity extends javax.swing.JFrame {
                 AddCityBuActionPerformed(evt);
             }
         });
-        getContentPane().add(AddCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+        getContentPane().add(AddCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 90, -1));
 
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,15 +89,15 @@ public class AddCity extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         jLabel6.setText("Connect to:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
-        getContentPane().add(cTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 100, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        getContentPane().add(cTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 100, 30));
 
         jLabel3.setText("Connect from:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
-        getContentPane().add(cFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 100, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
+        getContentPane().add(cFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 100, 30));
 
         connectCityBu.setText("Connect");
         connectCityBu.addActionListener(new java.awt.event.ActionListener() {
@@ -104,14 +105,15 @@ public class AddCity extends javax.swing.JFrame {
                 connectCityBuActionPerformed(evt);
             }
         });
-        getContentPane().add(connectCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+        getContentPane().add(connectCityBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
 
         jLabel4.setText("Distance:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
-        getContentPane().add(distanceInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 100, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        getContentPane().add(distanceInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 100, 30));
 
         jLabel7.setText("(Min: 4 Max: 20)");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 10, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -243,6 +245,7 @@ public class AddCity extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
