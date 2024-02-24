@@ -184,7 +184,7 @@ public class NewSim extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "There must be at least 4 cities and less than 20 to start the simulation.");
         return;
          }
-        
+        visualizer.clear();
         try {
             int cycles = Integer.parseInt(CyclesInput.getText());
             int antAmount = Integer.parseInt(AAInput.getText());
@@ -203,6 +203,7 @@ public class NewSim extends javax.swing.JFrame {
         visualizer.visualize(graph, shortestPath,simulation);
         visualizer.displayShortestPath(shortestPath);
         JOptionPane.showMessageDialog(null,"Cycles made: "+cycles+"\nAnts in the travelling the graph: "+antAmount+"\n"+shortestPathString);
+        simulation.reset();
         
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "All fields must be numbers");

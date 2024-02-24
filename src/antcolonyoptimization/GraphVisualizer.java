@@ -6,6 +6,7 @@ package antcolonyoptimization;
 
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.view.Viewer;
 
 /**
  *
@@ -36,7 +37,9 @@ public class GraphVisualizer {
             gsEdge.setAttribute("ui.label", String.valueOf(edge.getWeight()));
         }
 
-        gsGraph.display();
+
+        Viewer viewer = gsGraph.display();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
         displayShortestPath(shortestPath);
         gsGraph.setAttribute("ui.default.title","Cycles made: "+simulation.getCycles()+" \nAnt amount: "+simulation.getNumAnts()+""+shortestPathString);
     }
@@ -53,6 +56,9 @@ public class GraphVisualizer {
             gsEdge.setAttribute("ui.class", "marked");
         }
     }
+}
+public void clear() {
+        gsGraph.clear();
 }
     }
 

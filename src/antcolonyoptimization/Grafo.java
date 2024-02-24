@@ -62,7 +62,11 @@ public class Grafo<T> {
             }
         }
     }
-    
+
+    public void reset() {
+        this.startCity = null;
+        this.finalCity = null;
+    }
 
     public void setCities(DynamicArray<City> cities) {
         this.cities = cities;

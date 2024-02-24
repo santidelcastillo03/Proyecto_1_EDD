@@ -95,7 +95,8 @@ public class Simulation {
     public static void setAnts(DynamicArray<Ant> ants) {
         Simulation.ants = ants;
     }
-        
+
+
     
     public static DynamicArray<Edge> shortestPath(Grafo grafo) {
     DynamicArray<Edge> shortestPath = new DynamicArray<>();
@@ -155,7 +156,17 @@ public class Simulation {
     }
     return shortestPath;
 }
-
+    public void reset() {
+        this.alpha = 0.0;
+        this.beta = 0.0;
+        this.rho = 0.0;
+        this.q = 0.0;
+        this.numAnts = 0;
+        this.cycles = 0;
+        this.ants = new DynamicArray<Ant>();
+        this.graph = new Grafo<City>();
+        this.graph.reset();;
+    }
 
     
     
