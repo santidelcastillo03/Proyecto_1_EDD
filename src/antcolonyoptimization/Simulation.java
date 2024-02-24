@@ -161,7 +161,10 @@ public class Simulation {
     
       public static DynamicArray run(Grafo grafo) {
           DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
-              Ant.performCycle(grafo, grafo.getFinalCity());
+          for(int i = 0; i < cycles; i++){
+              System.out.println("Ciclo" + (i+1));
+          Ant.performCycle(grafo, grafo.getFinalCity());
+          }
             DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
