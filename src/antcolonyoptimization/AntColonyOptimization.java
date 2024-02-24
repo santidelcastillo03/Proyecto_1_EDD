@@ -24,10 +24,10 @@ public class AntColonyOptimization {
         graph = new Grafo();
         GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 50, (int) 0.5, 50, 1);
+        Simulation simulation = new Simulation(1.0, 2.0, 10, (int) 0.5, 10, 1);
 
         
-        graph.addCity("1");
+        /*graph.addCity("1");
         graph.addCity("2");
         graph.addCity("3");
         graph.addCity("4");
@@ -63,7 +63,7 @@ public class AntColonyOptimization {
          
 
         visualizer.visualize(graph, shortestPath,simulation);
-        visualizer.displayShortestPath(shortestPath);
+        visualizer.displayShortestPath(shortestPath);*/
         
     }
 
