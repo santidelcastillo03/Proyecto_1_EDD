@@ -111,7 +111,6 @@ public class Ant {
                 }else{
                 currentCity = path.getNext();
                 }
-                updatePheromones(this.pathsTraveled, ant);
                 System.out.println(currentCity.getName());
                 return currentCity;
                 
@@ -139,9 +138,10 @@ public class Ant {
                 ant.setCurrentCity(grafo.getStartCity());
                 System.out.println("fuera");
                 antsMoving.removeN(ant);
-            }else if(adjNodes.size() == 0){
                 updatePheromones(ant.getPathsTraveled(), ant);
+            }else if(adjNodes.size() == 0){
                 ant.setCurrentCity(grafo.getStartCity());
+                antsMoving.removeN(ant);
             }
                 else{
                 City previousCity = ant.getCurrentCity();
@@ -170,17 +170,6 @@ public class Ant {
         }
         
         else{
-            if(ant.pathsTraveled.size()-1 >= 0){
-                System.out.println(ant.getPathsTraveled().get(ant.getPathsTraveled().size()-1).getPrevious().getName() + " " + ant.getPathsTraveled().get(ant.getPathsTraveled().size()-1).getPrevious().getName());
-            for(Edge edge : adjNodes){
-                if(edge.getNext().equals(finalCity) || edge.getPrevious().equals(finalCity)){
-                    return edge;
-                }
-                else if (ant.pathsTraveled.get(ant.pathsTraveled.size()-1).equals(edge)){   
-                System.out.println("hola");
-                adjNodes.removeN(edge);
-                }
-        }}
         double total = 0;
         for(int i = 0; i < adjNodes.size(); i++){
             Edge sEdge = (Edge) adjNodes.get(i);
@@ -215,16 +204,10 @@ public class Ant {
     
     public static void updatePheromones(DynamicArray<Edge> edgesTraveled, Ant ant) {
     double rho = Simulation.getRho();
-    double p =  edgesTraveled.get(edgesTraveled.size()-1).getPheromones();
     double b = Simulation.getQ()/ant.distanceTraveled;
-    Edge lastEdge = edgesTraveled.get(edgesTraveled.size()-1);
-    lastEdge.setPheromones((1-rho)*p + b); //incremento
-    for (int i = 0; i < Grafo.getEdges().size(); i++){//evaporacion
-        if(!Grafo.getEdges().get(i).equals(lastEdge)){
-           double pher = Grafo.getEdges().get(i).getPheromones();
-           Grafo.getEdges().get(i).setPheromones(pher*(1-rho));
-       }
-       System.out.println(Grafo.getEdges().get(i).getPrevious().getName() +" -> " + Grafo.getEdges().get(i).getNext().getName() + " " +Grafo.getEdges().get(i).getPheromones());
+    for (int i = 0; i < edgesTraveled.size(); i++){//evaporacion
+        double p = edgesTraveled.get(i).getPheromones();
+           edgesTraveled.get(i).setPheromones((1-rho)*p + b);
        }
     }
     }
