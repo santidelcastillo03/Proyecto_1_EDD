@@ -19,31 +19,50 @@ public class AntColonyOptimization {
     public static void main(String[] args) {
         MainPage ui = new MainPage();
         ui.setVisible(true);
-        graph = new Grafo<>();
+        
+        
+        graph = new Grafo();
         GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 100, (int) 0.5, 50);
-        
-        graph.addCity("New york");
-        graph.addCity("Los Angeles");
-        graph.addCity("Chicago");
+        Simulation simulation = new Simulation(1.0, 2.0, 40, (int) 0.5, 5, 1);
 
-        graph.addEdge("New york", "Los Angeles", 2451);
-        graph.addEdge("Los Angeles", "Chicago", 2014);
-        graph.addEdge("Chicago", "New york", 790);
-        
-        simulation.run();
+        /*
+        graph.addCity("1");
+        graph.addCity("2");
+        graph.addCity("3");
+        graph.addCity("4");
+        graph.addCity("5");
+        graph.addCity("6");
+        graph.addCity("7");
+        graph.addCity("8");
 
 
-        DynamicArray<Edge> shortestPath = simulation.run();
+        graph.addEdge("1","2",10.0);
+        graph.addEdge("2", "3", 12.0);
+        graph.addEdge("3", "4", 16.0);
+        graph.addEdge("2", "5", 4.0);
+        graph.addEdge("4", "6", 20.0);
+        graph.addEdge("3", "7", 10.0);
+        graph.addEdge("6", "8", 1.0);
+        graph.addEdge("4", "8", 15.0);
+
+        graph.setFinalCity("6");
+        graph.setStartCity("1");
+
+
+
+
+        DynamicArray<Edge> shortestPath = simulation.run(graph);
         String shortestPathString = Simulation.printShortestPath(shortestPath);
         System.out.println(shortestPathString);
-
-              
-
-        visualizer.displayShortestPath(shortestPath);
-        visualizer.visualize(graph);
+         
         
+        
+         
+
+        visualizer.visualize(graph, shortestPath,simulation);
+        visualizer.displayShortestPath(shortestPath);
+        */
     }
 
     

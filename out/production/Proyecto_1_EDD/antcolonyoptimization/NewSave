@@ -1,0 +1,12 @@
+ciudad
+a
+c
+b
+d
+e
+aristas
+a,b,33.0
+b,c,55.0
+c,d,43.0
+a,d,10.0
+c,e,22.0

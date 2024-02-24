@@ -4,6 +4,12 @@
  */
 package antcolonyoptimization;
 
+import antcolonyoptimization.Ant;
+import antcolonyoptimization.City;
+import antcolonyoptimization.DynamicArray;
+import antcolonyoptimization.Edge;
+import antcolonyoptimization.Grafo;
+
 /**
  *
  * @author Santiago
@@ -18,13 +24,14 @@ public class Simulation {
     private static int cycles;
     private static Grafo<City> graph;
     
-    public Simulation(double alpha, double beta, int cycles, int rho, int numAnts) {
+    public Simulation(double alpha, double beta, int cycles, double rho, int numAnts, double q) {
         this.alpha = alpha;
         this.beta = beta;
         this.numAnts = numAnts;
         this.rho = rho;
         this.cycles = cycles;
-        this.ants = new DynamicArray<>();
+        this.ants = new DynamicArray<Ant>();
+        this.q = q;
     }
     public static double getQ() {
         return q;
@@ -90,38 +97,72 @@ public class Simulation {
     }
         
     
-    public static DynamicArray shortestPath(){
-      DynamicArray <Edge> shortestPath = new DynamicArray();
-      City currentCity = Grafo.getStartCity();
-      while(currentCity != Grafo.getFinalCity()){
-        DynamicArray<Edge> adjNodes = new DynamicArray();
-        int len = Grafo.getEdges().size();
-        for(int i = 0; i < len; i++){
-            if (Grafo.getEdges().get(i).getPrevious().equals(currentCity)){
-                adjNodes.add(Grafo.getEdges().get(i));
+    public static DynamicArray<Edge> shortestPath(Grafo grafo) {
+    DynamicArray<Edge> shortestPath = new DynamicArray<>();
+    City currentCity = grafo.getStartCity();
+    DynamicArray<Edge> allEdges= new DynamicArray();
+    for(Edge edge : grafo.getEdges() ){
+        allEdges.add(edge);
+    }
+    while (!currentCity.equals(grafo.getFinalCity())) {
+        DynamicArray<Edge> adjNodes = new DynamicArray<>();
+        System.out.println(currentCity.getName());
+        for (Edge edge : allEdges) {
+            if (edge.getPrevious().equals(currentCity)) {
+                adjNodes.add(edge);
             }
-            double pointer = adjNodes.get(0).getPheromones();
-        for(int a = 1; a < adjNodes.size(); a++){
-            if(pointer < adjNodes.get(a).getPheromones()){
-                shortestPath.add(adjNodes.get(a));
-                currentCity = adjNodes.get(a).getNext();
-                pointer = adjNodes.get(a).getPheromones();
+        }if (adjNodes.size() == 0){
+            DynamicArray<Edge> invAdjNodes = new DynamicArray();
+            for (Edge edge : allEdges){
+                if(edge.getNext().equals(currentCity)){
+                    invAdjNodes.add(edge);
+                }
+                
             }
+            double pher = invAdjNodes.get(0).getPheromones();
+            Edge invselectedEdge = invAdjNodes.get(0);
+            for(int i= 1; i < invAdjNodes.size(); i++){
+                if(pher < invAdjNodes.get(i).getPheromones()){
+                    pher = invAdjNodes.get(i).getPheromones();
+                    invselectedEdge = invAdjNodes.get(i);
+                }
+                
+                }
+                for (Edge edge : allEdges){
+                if(edge.getNext().equals(currentCity)){
+                    allEdges.removeN(edge);
+                }
+                }
+                currentCity = invselectedEdge.getPrevious();
+                shortestPath.removeN(invselectedEdge);
+                System.out.println("se regreso a " + currentCity.getName());
+                
+        } else {
+            double pher = adjNodes.get(0).getPheromones();
+            Edge selectedEdge = adjNodes.get(0);
+            for(int i= 1; i < adjNodes.size(); i++){
+                if(pher < adjNodes.get(i).getPheromones()){
+                    pher = adjNodes.get(i).getPheromones();
+                    selectedEdge = adjNodes.get(i);
+                }
+            
+            }
+            shortestPath.add(selectedEdge);
+            currentCity = selectedEdge.getNext();
+            System.out.println("fue a " + currentCity.getName());
         }
-      }
-    
+        
     }
-      return shortestPath;
-    }
+    return shortestPath;
+}
+
+
     
-      public static DynamicArray run() {
-          DynamicArray<Ant> colony = Ant.createColony(numAnts);
-          for (int a = 0; a < cycles; a++){
-              for (int i = 0; i < colony.size(); i++){
-              colony.get(i).performCycle();
-          } Ant.updatePheromones();
-      }
-            DynamicArray<Edge> result = shortestPath();
+    
+      public static DynamicArray run(Grafo grafo) {
+          DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
+              Ant.performCycle(grafo, grafo.getFinalCity());
+            DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
       
