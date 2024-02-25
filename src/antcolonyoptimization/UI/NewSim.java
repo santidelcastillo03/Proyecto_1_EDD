@@ -65,7 +65,6 @@ public class NewSim extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
@@ -165,9 +164,6 @@ public class NewSim extends javax.swing.JFrame {
 
         jLabel10.setText("After finishing editing the graph you can save the graph, start the simulation, or both");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
-
-        jLabel11.setText("(Min:  )");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 10, 10));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Untitled design.jpg"))); // NOI18N
@@ -301,7 +297,6 @@ public class NewSim extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
