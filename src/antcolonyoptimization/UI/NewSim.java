@@ -240,8 +240,11 @@ public class NewSim extends javax.swing.JFrame {
         graphLoader.saveToFile();
     }//GEN-LAST:event_SaveGraphBuActionPerformed
 
-    private void loadGraphBuActionPerformed(java.awt.event.ActionEvent evt) {                                            
-            graphLoader.loadFromFile();
+    private void loadGraphBuActionPerformed(java.awt.event.ActionEvent evt) { 
+        graph.reset();
+        graph = new Grafo<>();
+        visualizer.clear();
+        graphLoader.loadFromFile();
         }
 
     private void DelCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCityBuActionPerformed
