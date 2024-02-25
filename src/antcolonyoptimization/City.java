@@ -6,19 +6,31 @@ package antcolonyoptimization;
 
 /**
  *
- * @author santiagodelcastillo
+ * @author Angel Garcia
  */
 public class City {
     private String name;
-
+/**
+ * Constructor
+ * 
+ * @param name 
+ */
     public City(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }

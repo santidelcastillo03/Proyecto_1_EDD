@@ -11,8 +11,9 @@ import antcolonyoptimization.Edge;
 import antcolonyoptimization.Grafo;
 
 /**
- *
- * @author Santiago
+ *This class runs the ant colony optimization algorithm
+ * 
+ * @author Vicente Tralci
  */
 public class Simulation {
     private static double alpha;
@@ -24,6 +25,16 @@ public class Simulation {
     private static int cycles;
     private static Grafo<City> graph;
     
+    /**
+     * Constructor
+     * 
+     * @param alpha
+     * @param beta
+     * @param cycles
+     * @param rho
+     * @param numAnts
+     * @param q 
+     */
     public Simulation(double alpha, double beta, int cycles, double rho, int numAnts, double q) {
         this.alpha = alpha;
         this.beta = beta;
@@ -33,71 +44,143 @@ public class Simulation {
         this.ants = new DynamicArray<Ant>();
         this.q = q;
     }
+
+    /**
+     *
+     * @return
+     */
     public static double getQ() {
         return q;
     }
 
+    /**
+     *
+     * @param q
+     */
     public static void setQ(double q) {
         Simulation.q = q;
     }
+
+    /**
+     *
+     * @return
+     */
     public static double getAlpha() {
         return alpha;
     }
 
+    /**
+     *
+     * @param alpha
+     */
     public void setAlpha(double alpha) {
         this.alpha = alpha;
     }
 
+    /**
+     *
+     * @return
+     */
     public static double getBeta() {
         return beta;
     }
 
+    /**
+     *
+     * @param beta
+     */
     public void setBeta(double beta) {
         this.beta = beta;
     }
 
+    /**
+     *
+     * @return
+     */
     public static double getRho() {
         return rho;
     }
 
+    /**
+     *
+     * @param rho
+     */
     public void setRho(double rho) {
         this.rho = rho;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getNumAnts() {
         return numAnts;
     }
 
+    /**
+     *
+     * @param numAnts
+     */
     public void setNumAnts(int numAnts) {
         this.numAnts = numAnts;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getCycles() {
         return cycles;
     }
 
+    /**
+     *
+     * @param cycles
+     */
     public void setCycles(int cycles) {
         this.cycles = cycles;
     }
 
+    /**
+     *
+     * @return
+     */
     public static Grafo<City> getGraph() {
         return graph;
     }
 
+    /**
+     *
+     * @param graph
+     */
     public void setGraph(Grafo<City> graph) {
         this.graph = graph;
     }
 
+    /**
+     *
+     * @return
+     */
     public static DynamicArray<Ant> getAnts() {
         return ants;
     }
 
+    /**
+     *
+     * @param ants
+     */
     public static void setAnts(DynamicArray<Ant> ants) {
         Simulation.ants = ants;
     }
 
 
-    
+    /**
+     * Returns the shortest path
+     * 
+     * @author Vicente Tralci
+     * @param grafo the graph
+     * @return the shortest path
+     */
     public static DynamicArray<Edge> shortestPath(Grafo grafo) {
     DynamicArray<Edge> shortestPath = new DynamicArray<>();
     City currentCity = grafo.getStartCity();
@@ -155,7 +238,10 @@ public class Simulation {
         
     }
     return shortestPath;
-}
+}   /**
+    * Resets the simulation
+    * 
+    */
     public void reset() {
         this.alpha = 0.0;
         this.beta = 0.0;
@@ -169,7 +255,13 @@ public class Simulation {
     }
 
     
-    
+      /**
+       * Runs the simulation
+       * 
+       * @author Vicente Tralci
+       * @param grafo the graph used
+       * @return results
+       */
       public static DynamicArray run(Grafo grafo) {
           DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
           for(int i = 0; i < cycles; i++){
@@ -179,7 +271,12 @@ public class Simulation {
             DynamicArray<Edge> result = shortestPath(grafo);
             return result;
      }
-      
+      /**
+       * Prints the shortest path
+       * 
+       * @param shortestPath
+       * @return a string of the shortest path
+       */
       public static String printShortestPath(DynamicArray<Edge> shortestPath) {
         StringBuilder sb = new StringBuilder();
         sb.append("Shortest path:\n");

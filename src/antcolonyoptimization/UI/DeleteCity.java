@@ -81,7 +81,7 @@ public class DeleteCity extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void DelCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCityBuActionPerformed
         if (this.DelCityInput.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "City name cannot be empty");

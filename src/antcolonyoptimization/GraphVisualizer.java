@@ -9,17 +9,28 @@ import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.view.Viewer;
 
 /**
- *
- * @author Santiago
+ *Uses graphStream to create a graph visualizer
+ * 
+ * @author Santiago del Castillo
  */
 public class GraphVisualizer {
     private Graph gsGraph;
     
+    /**
+     *
+     */
     public GraphVisualizer() {
         gsGraph = new SingleGraph("Ant Colony Optimization");
 
     }
-    
+    /**
+     *Makes the graph visible
+     * 
+     * @author Santiago del Castillo
+     * @param graph
+     * @param shortestPath
+     * @param simulation 
+     */
     public void visualize(Grafo<City> graph, DynamicArray<Edge> shortestPath,Simulation simulation) {
         System.setProperty("org.graphstream.ui", "swing");
         gsGraph.setAttribute("ui.stylesheet", "graph { fill-color: white; } node { fill-color: black; text-alignment: under; text-size: 20; } edge { fill-color: grey; } edge .marked { fill-color: red; stroke-width: 5px;}");
@@ -43,7 +54,12 @@ public class GraphVisualizer {
         displayShortestPath(shortestPath);
         gsGraph.setAttribute("ui.default.title","Cycles made: "+simulation.getCycles()+" \nAnt amount: "+simulation.getNumAnts()+""+shortestPathString);
     }
-
+    /**
+     * Displays the shortest path by highlighting it in red
+     * 
+     * @author Santiago del Castillo
+     * @param shortestPath 
+     */
     public void displayShortestPath(DynamicArray<Edge> shortestPath) {
     for (Edge edge : shortestPath) {
         String edgeId1 = edge.getPrevious().getName() + "-" + edge.getNext().getName();
@@ -57,9 +73,13 @@ public class GraphVisualizer {
         }
     }
 }
-public void clear() {
-        gsGraph.clear();
-}
+
+    /**
+     *
+     */
+    public void clear() {
+            gsGraph.clear();
+    }
     }
 
 

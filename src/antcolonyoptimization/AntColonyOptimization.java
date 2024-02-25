@@ -10,21 +10,24 @@ import org.graphstream.graph.implementations.SingleGraph;
 
 /**
  *
- * @author santiagodelcastillo
+ * @author Santiago del Castillo
  */
 public class AntColonyOptimization {
     private static Grafo<City> graph;
     
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         MainPage ui = new MainPage();
         ui.setVisible(true);
         
         
-        graph = new Grafo();
-        GraphVisualizer visualizer = new GraphVisualizer();
+        //graph = new Grafo();
+        //GraphVisualizer visualizer = new GraphVisualizer();
         
-        Simulation simulation = new Simulation(1.0, 2.0, 10, (int) 0.5, 10, 1);
+        //Simulation simulation = new Simulation(1.0, 2.0, 10, (int) 0.5, 10, 1);
 
         
         /*graph.addCity("1");

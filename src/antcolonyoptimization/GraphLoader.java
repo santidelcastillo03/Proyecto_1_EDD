@@ -13,16 +13,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
- * @author Santiago
+ *This class is responsible for the reading writing of files
+ * Contains methods like loading a file, saving file and checking if its compatible
+ * 
+ * @author Santiago del Castillo
  */
 public class GraphLoader {
     private Grafo<City> graph;
-
+    /**
+     * Constructor
+     * @param graph 
+     */
     public GraphLoader(Grafo<City> graph) {
         this.graph = graph;
     }
-
+    /**
+     * Loads a file using JFileChooser
+     * 
+     * @author Santiago del Castillo
+     */
     public void loadFromFile() {
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
@@ -71,6 +80,11 @@ public class GraphLoader {
             }
         }
     }
+    /**
+     * Saves a file
+     * 
+     * @author Santiago del Castillo
+     */
     public void saveToFile() {
             JFileChooser fileChooser = new JFileChooser();
             int returnValue = fileChooser.showSaveDialog(null);
@@ -91,6 +105,13 @@ public class GraphLoader {
                 }
             }
         }
+    /**
+     * Checks if file is compatible
+     * 
+     * @author Vicente Tralci
+     * @param file the selected file
+     * @return true if its compatible, false if not
+     */
     public boolean isFileCompatible(File file) {
     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
         String line;

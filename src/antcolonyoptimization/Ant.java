@@ -6,8 +6,11 @@ package antcolonyoptimization;
 
 import java.util.Random;
 /**
- *
- * @author santiagodelcastillo
+ *This class is a single ant in the colony
+ * Contains method such as create colony, move to city, perform a cycle,
+ * update pheromones and decide which city to go next
+ * 
+ * @author Santiago del Castillo
  */
 public class Ant {
     private static double alpha;
@@ -19,7 +22,12 @@ public class Ant {
     private DynamicArray<Edge> pathsTraveled;
     private double distanceTraveled;
     
-
+    /**
+     * Constructor
+     * 
+     * @param startCity
+     * @param finalCity 
+     */
     public Ant(City startCity, City finalCity) {
         this.currentCity = Grafo.getStartCity();
         this.finalCity = Grafo.getFinalCity();
@@ -30,68 +38,134 @@ public class Ant {
         this.Q = Simulation.getQ();
     }
 
+    /**
+     *
+     * @return
+     */
     public static double getAlpha() {
         return alpha;
     }
 
+    /**
+     *
+     * @return
+     */
     public static double getBeta() {
         return beta;
     }
 
+    /**
+     *
+     * @return
+     */
     public static double getQ() {
         return Q;
     }
 
+    /**
+     *
+     * @return
+     */
     public static Random getRANDOM() {
         return RANDOM;
     }
 
+    /**
+     *
+     * @param RANDOM
+     */
     public static void setRANDOM(Random RANDOM) {
         Ant.RANDOM = RANDOM;
     }
 
+    /**
+     *
+     * @return
+     */
     public City getCurrentCity() {
         return currentCity;
     }
 
+    /**
+     *
+     * @param currentCity
+     */
     public  void setCurrentCity(City currentCity) {
         this.currentCity = currentCity;
     }
 
+    /**
+     *
+     * @return
+     */
     public  City getFinalCity() {
         return finalCity;
     }
 
+    /**
+     *
+     * @param finalCity
+     */
     public  void setFinalCity(City finalCity) {
         this.finalCity = finalCity;
     }
 
+    /**
+     *
+     * @return
+     */
     public DynamicArray<Edge> getPathsTraveled() {
         return pathsTraveled;
     }
 
+    /**
+     *
+     * @param pathsTraveled
+     */
     public void setPathsTraveled(DynamicArray<Edge> pathsTraveled) {
         this.pathsTraveled = pathsTraveled;
     }
 
+    /**
+     *
+     * @return
+     */
     public  double getDistanceTraveled() {
         return distanceTraveled;
     }
 
+    /**
+     *
+     * @param distanceTraveled
+     */
     public void setDistanceTraveled(double distanceTraveled) {
         this.distanceTraveled = distanceTraveled;
     }
     
-    
+    /**
+     *
+     * @param alpha
+     */
     public static void setAlpha(double alpha) {
         Ant.alpha = alpha;
     }
 
+    /**
+     *
+     * @param beta
+     */
     public static void setBeta(double beta) {
         Ant.beta = beta;
     }
     
- 
+    /**
+     * Creates a colony of ants 
+     * 
+     * @author Vicnete Tralci
+     * @param numAnts the number of ants to create
+     * @param grafo
+     * @return the colony of ants
+     */
     public static DynamicArray createColony(int numAnts, Grafo grafo){
         for (int i = 0; i < numAnts; i++){
             Ant newAnt = new Ant(grafo.getStartCity(), grafo.getFinalCity());
@@ -100,7 +174,17 @@ public class Ant {
         return Simulation.getAnts();
     }
     
-    
+    /**
+     * Moves the ant to another city
+     * 
+     * @author Vicente Tralci
+     * @param grafo
+     * @param previous the previous city
+     * @param currentCity the current city
+     * @param finalCity the final city
+     * @param ant the ant
+     * @return the new current city
+     */
     public City moveCity(Grafo grafo, City previous, City currentCity, City finalCity, Ant ant){
                 Edge path = decideNextCity(previous, currentCity, finalCity, ant);
                 this.pathsTraveled.add(path);
@@ -116,7 +200,13 @@ public class Ant {
                 return currentCity;
                 
     }
-    
+    /**
+     * Performs a cycle
+     * 
+     * @author Vicente Tralci
+     * @param grafo the graph containing the cities
+     * @param finalCity the final city
+     */
    public static void performCycle(Grafo grafo, City finalCity) {
        DynamicArray<Ant> antsMoving = new DynamicArray();
        for (Ant ant : Simulation.getAnts()){
@@ -152,7 +242,16 @@ public class Ant {
            
    }}
 
-    
+    /**
+     * Decides the next city an ant will move to
+     * 
+     * @author Vicente Tralci
+     * @param previous the previous city
+     * @param currentCity the current city
+     * @param finalCity the final city
+     * @param ant the ant to move
+     * @return the edge to the next city
+     */
     public Edge decideNextCity(City previous, City currentCity, City finalCity, Ant ant){
         System.out.println("papa");
         DynamicArray<Edge> probArray = new DynamicArray();
@@ -212,7 +311,13 @@ public class Ant {
         
     }
     
-    
+    /**
+     * Updates the pheromones on the edges traveled 
+     * 
+     * @author Vicente Tralci
+     * @param edgesTraveled the edges traveled by the ant
+     * @param ant the ant that traveled the paths
+     */
     public static void updatePheromones(DynamicArray<Edge> edgesTraveled, Ant ant) {
     double rho = Simulation.getRho();
     double p =  edgesTraveled.get(edgesTraveled.size()-1).getPheromones();
