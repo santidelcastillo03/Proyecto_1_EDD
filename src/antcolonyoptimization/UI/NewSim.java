@@ -186,11 +186,27 @@ public class NewSim extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void StartSimBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimBuActionPerformed
-         if (graph.getCities().size() < 4 || graph.getCities().size() > 20) {
+        visualizer.clear();
+        
+        if (graph.getCities().size() == 0) {
+            JOptionPane.showMessageDialog(null, "The graph is empty");
+            return;
+        }
+        
+        if (graph.getStartCity() == null) {
+        JOptionPane.showMessageDialog(null, "Please select add a start city before starting the simulation");
+        return; 
+        }   
+        if (graph.getFinalCity()== null) {
+            JOptionPane.showMessageDialog(null, "Please add a destination city before starting the simulation");
+            return;
+        }
+        
+        if (graph.getCities().size() < 4 || graph.getCities().size() > 20) {
         JOptionPane.showMessageDialog(null, "There must be at least 4 cities and less than 20 to start the simulation.");
         return;
          }
-        visualizer.clear();
+        
             if (!graph.allCitiesHaveEdges()) {
                 JOptionPane.showMessageDialog(null, "All cities must have at least one edge.");
                 return;
@@ -228,9 +244,9 @@ public class NewSim extends javax.swing.JFrame {
         graphLoader.saveToFile();
     }//GEN-LAST:event_SaveGraphBuActionPerformed
 
-    private void loadGraphBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGraphBuActionPerformed
-        graphLoader.loadFromFile();
-    }//GEN-LAST:event_loadGraphBuActionPerformed
+    private void loadGraphBuActionPerformed(java.awt.event.ActionEvent evt) {                                            
+            graphLoader.loadFromFile();
+        }
 
     private void DelCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCityBuActionPerformed
         deleteCity.setVisible(true);

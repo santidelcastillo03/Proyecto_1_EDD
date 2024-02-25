@@ -4,7 +4,7 @@
  */
 package antcolonyoptimization;
 
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,6 +28,11 @@ public class GraphLoader {
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+
+            if (!isFileCompatible(selectedFile)) {
+                JOptionPane.showMessageDialog(null, "The file is not compatible");
+                return;
+            }
             
             try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
                 String line;
@@ -86,6 +91,36 @@ public class GraphLoader {
                 }
             }
         }
+    public boolean isFileCompatible(File file) {
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String line;
+        boolean isCity = true;
+        while ((line = br.readLine()) != null) {
+            if (isCity) {
+                if (line.equals("aristas")) {
+                    isCity = false;
+                    continue;
+                }
+                if (line.trim().isEmpty()) {
+                    return false;
+                }
+            } else {
+                String[] edgeData = line.split(",");
+                if (edgeData.length != 3) {
+                    return false;
+                }
+                try {
+                    Double.parseDouble(edgeData[2]);
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        }
+    } catch (IOException e) {
+        return false;
+    }
+    return true;
+}
 }
 
 
