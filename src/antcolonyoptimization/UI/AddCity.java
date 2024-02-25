@@ -165,37 +165,40 @@ public class AddCity extends javax.swing.JFrame {
     }//GEN-LAST:event_connectCityBuActionPerformed
 
     private void AddCityBuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCityBuActionPerformed
-        
-        if (this.cityNameInput.getText().isEmpty()) {
+
+        String cityName = this.cityNameInput.getText();
+
+        if (cityName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "City name cannot be empty");
             return;
         }
-    
-        if (this.combo.getSelectedItem() == "Start city") {
-        graph.addCity(this.cityNameInput.getText());
-        if (!graph.startCityExists()) {
-            graph.setStartCity(this.cityNameInput.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Start city already exists");
-            return;
-        }
-    } else if (this.combo.getSelectedItem() == "Destination city") {
-        graph.addCity(this.cityNameInput.getText());
-        if (!graph.finalCityExists()) {
-            graph.setFinalCity(this.cityNameInput.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Destination city already exists");
-            return;
-        }
-    } else {
-        if (graph.cityExists(this.cityNameInput.getText()) == false) {
-            graph.addCity(this.cityNameInput.getText());
-        } else {
+
+        if (graph.cityExists(cityName)) {
             JOptionPane.showMessageDialog(null, "This city already exists");
             return;
         }
-    }
-    cityNameInput.setText("");
+
+        if (this.combo.getSelectedItem() == "Start city") {
+            if (!graph.startCityExists()) {
+                graph.addCity(cityName);
+                graph.setStartCity(cityName);
+            } else {
+                JOptionPane.showMessageDialog(null, "Start city already exists");
+                return;
+            }
+        } else if (this.combo.getSelectedItem() == "Destination city") {
+            if (!graph.finalCityExists()) {
+                graph.addCity(cityName);
+                graph.setFinalCity(cityName);
+            } else {
+                JOptionPane.showMessageDialog(null, "Destination city already exists");
+                return;
+            }
+        } else {
+            graph.addCity(cityName);
+        }
+
+        cityNameInput.setText("");
     }//GEN-LAST:event_AddCityBuActionPerformed
 
     /**
