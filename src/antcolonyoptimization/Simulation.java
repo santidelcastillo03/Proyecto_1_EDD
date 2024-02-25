@@ -190,7 +190,6 @@ public class Simulation {
     }
     while (!currentCity.equals(grafo.getFinalCity())) {
         DynamicArray<Edge> adjNodes = new DynamicArray<>();
-        System.out.println(currentCity.getName());
         for (Edge edge : allEdges) {
             if (edge.getPrevious().equals(currentCity)) {
                 adjNodes.add(edge);
@@ -219,7 +218,6 @@ public class Simulation {
                 }
                 currentCity = invselectedEdge.getPrevious();
                 shortestPath.removeN(invselectedEdge);
-                System.out.println("se regreso a " + currentCity.getName());
                 
         } else {
             double pher = adjNodes.get(0).getPheromones();
@@ -233,7 +231,6 @@ public class Simulation {
             }
             shortestPath.add(selectedEdge);
             currentCity = selectedEdge.getNext();
-            System.out.println("fue a " + currentCity.getName());
         }
         
     }
@@ -265,7 +262,6 @@ public class Simulation {
       public static DynamicArray run(Grafo grafo) {
           DynamicArray<Ant> colony = Ant.createColony(numAnts, grafo);
           for(int i = 0; i < cycles; i++){
-              System.out.println("Ciclo" + (i+1));
           Ant.performCycle(grafo, grafo.getFinalCity());
           }
             DynamicArray<Edge> result = shortestPath(grafo);

@@ -196,7 +196,6 @@ public class Ant {
                 currentCity = path.getNext();
                 }
                 updatePheromones(this.pathsTraveled, ant);
-                System.out.println(currentCity.getName());
                 return currentCity;
                 
     }
@@ -214,20 +213,18 @@ public class Ant {
        } int i =0;
        
        while(antsMoving.size() > 0){
-           System.out.println("iteracion" +i);
-           System.out.println("hormigas moviendose " + antsMoving.size());
+          
             DynamicArray<Edge> adjNodes = new DynamicArray();
             int a= 1;
             for(Ant ant : antsMoving){
-                System.out.println(ant);
-                System.out.println("ciudad " + ant.getCurrentCity().getName());
+                
             for (Edge edge : Grafo.getEdges()){
                 if(ant.getCurrentCity().equals(edge.getPrevious())){
                 adjNodes.add(edge);
          }}
             if (ant.getCurrentCity().equals(grafo.getFinalCity())){
                 ant.setCurrentCity(grafo.getStartCity());
-                System.out.println("fuera");
+                
                 antsMoving.removeN(ant);
             }else if(adjNodes.size() == 0){
                 updatePheromones(ant.getPathsTraveled(), ant);
@@ -236,7 +233,6 @@ public class Ant {
                 else{
                 City previousCity = ant.getCurrentCity();
                 ant.setCurrentCity(ant.moveCity(grafo, previousCity, ant.getCurrentCity(), ant.getFinalCity(), ant) );
-                System.out.println("->" + ant.getCurrentCity().getName());
             }a++;
     }i++;
            
@@ -253,7 +249,6 @@ public class Ant {
      * @return the edge to the next city
      */
     public Edge decideNextCity(City previous, City currentCity, City finalCity, Ant ant){
-        System.out.println("papa");
         DynamicArray<Edge> probArray = new DynamicArray();
         DynamicArray<Edge> adjNodes = new DynamicArray();
         int len = Grafo.getEdges().size();
@@ -270,13 +265,11 @@ public class Ant {
         
         else{
             if(ant.pathsTraveled.size()-1 >= 0){
-                System.out.println(ant.getPathsTraveled().get(ant.getPathsTraveled().size()-1).getPrevious().getName() + " " + ant.getPathsTraveled().get(ant.getPathsTraveled().size()-1).getPrevious().getName());
             for(Edge edge : adjNodes){
                 if(edge.getNext().equals(finalCity) || edge.getPrevious().equals(finalCity)){
                     return edge;
                 }
                 else if (ant.pathsTraveled.get(ant.pathsTraveled.size()-1).equals(edge)){   
-                System.out.println("hola");
                 adjNodes.removeN(edge);
                 }
         }}
@@ -294,7 +287,6 @@ public class Ant {
             double nPheromones = sEdge.getPheromones();
             double rs = Math.pow(nPheromones, alpha)*Math.pow(Q/distance, beta);
             int prob = (int) Math.round((rs/total)*100);
-            System.out.println(adjNodes.get(i).getPrevious().getName()+ adjNodes.get(i).getNext().getName() + "->"+ prob);
             
             for(int a = 0; a < prob; a++){
                 probArray.add(sEdge);
@@ -302,9 +294,7 @@ public class Ant {
         }
            Random rand = new Random();
             
-           System.out.println("len " + probArray.size());
            int random = (int) rand.nextInt(probArray.size());
-           System.out.println("random" + random);
            Edge selEdge  = (Edge) probArray.get(random);
            return selEdge;
         }
@@ -329,7 +319,6 @@ public class Ant {
            double pher = Grafo.getEdges().get(i).getPheromones();
            Grafo.getEdges().get(i).setPheromones(pher*(1-rho));
        }
-       System.out.println(Grafo.getEdges().get(i).getPrevious().getName() +" -> " + Grafo.getEdges().get(i).getNext().getName() + " " +Grafo.getEdges().get(i).getPheromones());
        }
     }
     }
